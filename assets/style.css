@@ -1,19 +1,90 @@
 :root {
-    background-color: pink;
+background-color: pink;
+--list-color: rgb(123, 69, 123);
+--largest-font: 50px;
+--larger-font: 40px;
+--large-font: 30px;
+--centered: center;
 }
 
-.welcome-page {
-font-size: 50px;
-text-align: center;
+body {
+}
+
+.h1El {
+font-size: var(--largest-font);
+text-align: var(--centered);
 font-weight: bolder;
 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 margin: 100px 100px 20px 100px;
 }
 
-.welcome-page-description {
-font-size: 35px;
-text-align: center;
-font-weight: ;
+.h2El {
+font-size: var(--large-font);
+text-align: var(--centered);
 font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#startBtn {
+text-align: var(--centered);
+margin: 100px 100px 100px 550px;
+font-size: var(--larger-font);
+text-transform:uppercase;
+}
+
+.listEl {
+margin: 100px;
+font-size: var(--large-font);
+text-align: var(--centered);
+font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#correctAnswerBtn {
+background-color: var(--list-color);
+font-size: var(--large-font);
+}
+
+#wrongAnswerBtn {
+background-color: var(--list-color);
+font-size: var(--large-font);
+}
+
+#generateFinalScore {
+text-align: var(--centered);
+font-size: var(--large-font);
+}
+
+#insertInitialBox {
+text-align: var(--centered);
+font-size: var(--large-font);
+}
+
+#submitBtn {
+text-align: var(--centered);
+margin: 100px 100px 100px 550px;
+font-size: var(--larger-font);
+}
+
+#retakeQuizbtn {
+font-size: var(--larger-font);
+margin: 100px 100px 100px 200px;
+}
+
+#resetScoreBoardbtn {
+font-size: var(--larger-font);
+margin: 100px 100px 100px 200px;
+}
+
+
+#Timer {
+position: fixed;
+top: 0;
+right: 0;
+font-size: var(--large-font);
+}
+
+#viewHighScore {
+position: fixed;
+top: 0;
+left: 0;
+font-size: var(--large-font);
+}

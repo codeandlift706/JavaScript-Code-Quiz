@@ -10,34 +10,39 @@
 </head>
 
 <body>
-    <h1 class="welcome-page">JavaScript Fundamentals: Test Your Knowledge</h1>
-    <h2 class="welcome-page-description">Take the quiz and see how well you score before time runs out!  
+    <h1 class="h1El">JavaScript Fundamentals: Test Your Knowledge</h1>
+    <h2 class="h2El">Take the quiz and see how well you score before time runs out!  
         <p>NOTE: Points will be deducted each time you select the wrong answer.</p></h2>
-    <button id="startButton">Start the quiz!</button>
+    <button id="startBtn">Start the quiz</button>
 
-    <h1 class="questionDisplay">Question</h1>
+    <h1 class="h1El">Question</h1>
         <ol>
-            <li>
-            1. <button id="correctAnswerbtn">Choice1</button>
-            2. <button id="wrongAnswerbtn">Choice2</button>
-            3. <button id="wrongAnswerbtn">Choice3</button>
-            4. <button id="wrongAnswerbtn">Choice4</button>
+            <li class="listEl">
+            <button id="correctAnswerBtn">1. Choice1</button> 
+            <p>
+            <button id="wrongAnswerBtn">2. Choice2</button>
+            </p><p>
+            <button id="wrongAnswerBtn">3. Choice3</button>
+            <p></p>
+            <button id="wrongAnswerBtn">4. Choice4</button>
+            <p></p>
             </li>
         </ol>
 
     <form>
-        <h1 class="">All done!</h1>
+        <h1 class="h1El">All done!</h1>
         <h2 id="generateFinalScore">Your final score is:_______</h2>
         <h2 id="insertInitialBox">Initials:_________</h2>
-        <button id="submitScoreAndInitialbtn">Submit your score</button>
+        <button id="submitBtn">Submit your score</button>
     </form>
 
-    <h1>High Scores</h1>
-    <button id="retakeQuizbtn">Go back to retake the quiz</button>
-    <button id="resetScoreBoardbtn">Reset the Scoreboard</button>
+    <h1 class="h1El">High Scores</h1>
+    <button id="retakeQuizbtn">Retake the quiz</button>
+    <button id="resetScoreBoardbtn">Reset the scoreboard</button>
 
     <aside id="Timer">Time Remaining: __</aside>
     <aside id="viewHighScore">View Scoreboard</aside>
 
 </body>
+
 </html>
