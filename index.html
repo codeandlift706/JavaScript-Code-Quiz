@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Javascript Quiz</title>
     <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script defer src="script.js"></script>
 </head>
 
 <body>
-    <h1>Test your knowledge of JavaScript fundamentals with this timed quiz!</h1>
-    <h2>Play and see how well you score! Careful! If you select the wrong answer, points will be deducted.</h2>
+    <h1 class="welcome-page">JavaScript Fundamentals: Test Your Knowledge</h1>
+    <h2 class="welcome-page-description">Take the quiz and see how well you score before time runs out!  
+        <p>NOTE: Points will be deducted each time you select the wrong answer.</p></h2>
     <button id="startButton">Start the quiz!</button>
 
     <h1 class="questionDisplay">Question</h1>
@@ -37,6 +38,6 @@
 
     <aside id="Timer">Time Remaining: __</aside>
     <aside id="viewHighScore">View Scoreboard</aside>
-    
+
 </body>
 </html>
