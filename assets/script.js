@@ -1,6 +1,6 @@
-//global variables
+//global variables----------------------------------------------------------------
 const headerEl = document.querySelector(".frontPage");
-const sectionEl = document.querySelectorAll("section");
+const sectionEl = document.querySelectorAll("section"); //returns array, so we need to target each object,
 const firstSectionEl = document.querySelector(".quizPage");
 const secondSectionEl = document.querySelector(".donePage");
 const thirdSectionEl = document.querySelector(".highScorePage");
@@ -12,14 +12,13 @@ const wrongAnswer = document.getElementById("wrongAnswerBtn");
 const timeEl = document.getElementById("timer");
 
 
-
-//functions
+//functions----------------------------------------------------------------
 //------------------------------DEFAULT HOME PAGE SHOWS ONLY THE <header>
 
 function defaultHomepage() {
 
-    if (sectionEl.style.display !== "none") {
-        sectionEl.style.display = "none";
+    if (sectionEl.style.display !== "none") { 
+        sectionEl.style.display = "none";  // add for loop to target each object, sectionEl[0]
         headerEl.style.display = "block";
     }
 }
