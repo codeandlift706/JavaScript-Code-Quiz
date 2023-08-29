@@ -6,7 +6,7 @@
     <title>Javascript Quiz</title>
     <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/style.css" />
-    <script defer src="script.js"></script>
+    <script defer src="./assets/script.js"></script>
 </head>
 
 <body>
@@ -14,7 +14,8 @@
     <h1 class="h1El">JavaScript Fundamentals: Test Your Knowledge</h1>
     <h2 class="h2El">Take the quiz and see how well you score before time runs out!  
         <p>NOTE: Points will be deducted each time you select the wrong answer.</p></h2>
-    <button id="startBtn">Start the quiz</button>
+
+    <button onclick="pageSwitcherFunction()" id="pageSwitcher">Start the quiz</button>
     </section>
 
     <section class="quizPage"></section>
@@ -33,16 +34,20 @@
         </ol>
     </section>
 
+    <section class="donePage">
     <form>
         <h1 class="h1El">All done!</h1>
         <h2 id="generateFinalScore">Your final score is:_______</h2>
         <h2 id="insertInitialBox">Initials:_________</h2>
         <button id="submitBtn">Submit your score</button>
     </form>
+    </section>
 
+    <section class="highScorePage">
     <h1 class="h1El">High Scores</h1>
     <button id="retakeQuizbtn">Retake the quiz</button>
     <button id="resetScoreBoardbtn">Reset the scoreboard</button>
+    </section>
 
     <aside id="Timer">Time Remaining: __</aside>
     <aside id="viewHighScore">View Scoreboard</aside>
