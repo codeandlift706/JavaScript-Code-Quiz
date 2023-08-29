@@ -8,10 +8,12 @@ const thirdSectionEl = document.querySelector(".highScorePage");
 const submitScoreBtn = document.getElementById("submitBtn");
 const retakeBtn = document.getElementById("retakeQuizbtn");
 const resetScoreboard = document.getElementById("resetScoreBoardbtn");
-const correctAnswer = document.getElementById("correctAnswerBtn");
-const wrongAnswer = document.getElementById("wrongAnswerBtn");
+const correctBtn = document.getElementById("correctAnswerBtn");
+const wrongBtn = document.getElementById("wrongAnswerBtn");
 const timeEl = document.getElementById("timer");
 
+const correctMessage = "Correct!";
+const wrongMessage = "Incorrect!";
 
 //functions----------------------------------------------------------------
 //------------------------------DEFAULT HOME PAGE SHOWS ONLY THE <header>
@@ -26,14 +28,7 @@ function defaultHomepage() {
     }
 }
     
-    defaultHomepage();
-
-        //firstSectionEl.style.display = "none";
-        //secondSectionEl.style.display = "none";
-        //thirdSectionEl.style.display = "none";
-        //headerEl.style.display = "block";
-    
-
+defaultHomepage();
 
 //------------------------------WHEN YOU CLICK THE START BUTTON, <HEADER> DISAPPEARS, "quizPage" SECTION APPEARS, TIMER STARTS, TIMER (-2) IF THE USER SELECTS WRONG ANSWER. WHEN TIMER ENDS, "quizPage" SECTION DISAPPEARS, "donePage" SECTION APPEARS
 
@@ -43,6 +38,19 @@ function pageSwitcherFunction() {
         headerEl.style.display = "none";
         firstSectionEl.style.display = "block";
     }
+    
+    setTime();
+    userTakesQuiz();
+}
+
+
+function userTakesQuiz() {
+    correctBtn.addEventListener("click",function() {
+    alert(correctMessage);
+})
+    wrongBtn.addEventListener("click", function() {
+    alert(wrongMessage);
+})
 }
 
 
@@ -57,11 +65,11 @@ function setTime() {
 
 
     if(secondsLeft > 2 && wrongAnswerDeduction) {
-        ((secondsLeft--) - 2);
+    ((secondsLeft--) - 2);
     }
 
     else if (pointsGain) {
-        //need comment
+    //need comment
     }
 
     else (secondsLeft === 0); {
@@ -113,25 +121,3 @@ submitButton.addEventListener("click", function(event) {
 renderLastScore();
 
 
-
-
-
-
-
-
-//variables to dynamically change classes
-//const pageSwitcher = document.querySelector("#pageSwitcher");
-//const container = document.querySelector("#frontPage");
-//default mode is to only show the starting page
-// const mode ="introPageOnly";
-//pageSwitcher.addEventListener("click", function() { //process to dynamically change classes, to "hide"
-//   if (mode === "introPageOnly") {
-//  mode = "quizPage";
-//  container.setAttribute("class", "quizPage");
-//  }
-
-//  else {
-//   mode = "introPageOnly";
-//  container.setAttribute("class", "introPageOnly");
-//   }
-// });
