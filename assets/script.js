@@ -1,6 +1,7 @@
 //global variables----------------------------------------------------------------
 const headerEl = document.querySelector(".frontPage");
-const sectionEl = document.querySelectorAll("section"); //returns array, so we need to target each object,
+const sectionEl = document.querySelectorAll("section");
+const firstBtn = document.getElementById("pageSwitcher");
 const firstSectionEl = document.querySelector(".quizPage");
 const secondSectionEl = document.querySelector(".donePage");
 const thirdSectionEl = document.querySelector(".highScorePage");
@@ -16,25 +17,31 @@ const timeEl = document.getElementById("timer");
 //------------------------------DEFAULT HOME PAGE SHOWS ONLY THE <header>
 
 function defaultHomepage() {
+    var elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
 
-    if (sectionEl.style.display !== "none") { 
-        sectionEl.style.display = "none";  // add for loop to target each object, sectionEl[0]
-        headerEl.style.display = "block";
+    if (headerEl.style.display !== "none") { 
+        for (var i = 0; i < elementSections.length; i++) {
+            elementSections[i].style.display = "none";
+        }
     }
 }
+    
+    defaultHomepage();
 
-defaultHomepage();
+        //firstSectionEl.style.display = "none";
+        //secondSectionEl.style.display = "none";
+        //thirdSectionEl.style.display = "none";
+        //headerEl.style.display = "block";
+    
+
 
 //------------------------------WHEN YOU CLICK THE START BUTTON, <HEADER> DISAPPEARS, "quizPage" SECTION APPEARS, TIMER STARTS, TIMER (-2) IF THE USER SELECTS WRONG ANSWER. WHEN TIMER ENDS, "quizPage" SECTION DISAPPEARS, "donePage" SECTION APPEARS
 
 function pageSwitcherFunction() {
-
+    const headerEl = document.querySelector(".frontPage");
     if (headerEl.style.display !== "none") {
         headerEl.style.display = "none";
         firstSectionEl.style.display = "block";
-    } else {
-        headerEl.style.display = "block";
-        firstSectionEl.style.display = "none";
     }
 }
 
@@ -49,12 +56,12 @@ function setTime() {
         timeEl.textContent = secondsLeft;
 
 
-    if(secondsLeft > 2 && wrongAnswerDeduction); {
+    if(secondsLeft > 2 && wrongAnswerDeduction) {
         ((secondsLeft--) - 2);
     }
 
     else if (pointsGain) {
-        NEED POINTS SCORE
+        //need comment
     }
 
     else (secondsLeft === 0); {

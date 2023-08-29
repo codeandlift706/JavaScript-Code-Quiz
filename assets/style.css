@@ -13,16 +13,19 @@ body {
 
 .frontPage {
 
-
 }
 
 .quizPage {
 
+}
+
+.donePage {
 
 }
 
-
-
+.highScorePage {
+    
+}
 
 
 .h1El {
@@ -39,7 +42,7 @@ text-align: var(--centered);
 font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#startBtn {
+#pageSwitcher {
 text-align: var(--centered);
 margin: 100px 100px 100px 550px;
 font-size: var(--larger-font);
@@ -90,7 +93,7 @@ margin: 100px 100px 100px 200px;
 }
 
 
-#Timer {
+#timer {
 position: fixed;
 top: 0;
 right: 0;

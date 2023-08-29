@@ -9,16 +9,15 @@
     <script defer src="./assets/script.js"></script>
 </head>
 
-<body>
-    <section class="frontPage">
+<header class="frontPage">
     <h1 class="h1El">JavaScript Fundamentals: Test Your Knowledge</h1>
     <h2 class="h2El">Take the quiz and see how well you score before time runs out!  
         <p>NOTE: Points will be deducted each time you select the wrong answer.</p></h2>
 
     <button onclick="pageSwitcherFunction()" id="pageSwitcher">Start the quiz</button>
-    </section>
+</header>
 
-    <section class="quizPage"></section>
+    <section class="quizPage">
     <h1 class="h1El">Question</h1>
         <ol>
             <li class="listEl">
@@ -49,7 +48,7 @@
     <button id="resetScoreBoardbtn">Reset the scoreboard</button>
     </section>
 
-    <aside id="Timer">Time Remaining: __</aside>
+    <aside id="timer">Time: __</aside>
     <aside id="viewHighScore">View Scoreboard</aside>
 
 </body>
