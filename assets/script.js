@@ -1,19 +1,27 @@
 //global variables----------------------------------------------------------------
 const headerEl = document.querySelector(".frontPage");
 const sectionEl = document.querySelectorAll("section");
-const firstBtn = document.getElementById("pageSwitcher");
 const firstSectionEl = document.querySelector(".quizPage");
 const secondSectionEl = document.querySelector(".donePage");
 const thirdSectionEl = document.querySelector(".highScorePage");
+
+const firstBtn = document.getElementById("pageSwitcher");
 const submitScoreBtn = document.getElementById("submitBtn");
 const retakeBtn = document.getElementById("retakeQuizbtn");
-const resetScoreboard = document.getElementById("resetScoreBoardbtn");
+const resetScoreboardBtn = document.getElementById("resetScoreBoardbtn");
+
+const timeEl = document.getElementById("timer");
+const quizQuestions = document.querySelector(".question");
+const quizChoices = document.querySelector(".listEl");
 const correctBtn = document.getElementById("correctAnswerBtn");
 const wrongBtn = document.getElementById("wrongAnswerBtn");
-const timeEl = document.getElementById("timer");
 
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
+
+var secondsLeft = 100;
+var wrongAnswerDeduction = 2;
+var pointsGain = 4;
 
 //functions----------------------------------------------------------------
 //------------------------------DEFAULT HOME PAGE SHOWS ONLY THE <header>
@@ -33,7 +41,7 @@ defaultHomepage();
 //------------------------------WHEN YOU CLICK THE START BUTTON, <HEADER> DISAPPEARS, "quizPage" SECTION APPEARS, TIMER STARTS, TIMER (-2) IF THE USER SELECTS WRONG ANSWER. WHEN TIMER ENDS, "quizPage" SECTION DISAPPEARS, "donePage" SECTION APPEARS
 
 function pageSwitcherFunction() {
-    const headerEl = document.querySelector(".frontPage");
+    var headerEl = document.querySelector(".frontPage");
     if (headerEl.style.display !== "none") {
         headerEl.style.display = "none";
         firstSectionEl.style.display = "block";
@@ -42,7 +50,6 @@ function pageSwitcherFunction() {
     setTime();
     userTakesQuiz();
 }
-
 
 function userTakesQuiz() {
     correctBtn.addEventListener("click",function() {
@@ -55,24 +62,23 @@ function userTakesQuiz() {
 
 
 function setTime() {
-    var secondsLeft = 100;
-    var wrongAnswerDeduction = 2;
-    var pointsGain = 2;
+var secondsLeft = 100;
+var wrongAnswerDeduction = 2;
+var pointsGain = 4;
 
     var timerInterval = setInterval(function() {
         secondsLeft--;
-        timeEl.textContent = secondsLeft;
+        timeEl.textContent = "Time: " + secondsLeft;
 
+    //if((secondsLeft > 2) && (wrongAnswerDeduction)) {
+    //((secondsLeft--) - 2);
+    //}
 
-    if(secondsLeft > 2 && wrongAnswerDeduction) {
-    ((secondsLeft--) - 2);
-    }
-
-    else if (pointsGain) {
+    //else if (pointsGain) {
     //need comment
-    }
+    //}
 
-    else (secondsLeft === 0); {
+    if (secondsLeft === 0); {
         clearInterval(timerInterval);
         secondSectionEl.style.display = "block";
         firstSectionEl.style.display = "none";
@@ -80,6 +86,7 @@ function setTime() {
     }
 }, 1000);
 }
+
 
 
 //------------------------------ENTER INITIALS AND HIT THE SUBMIT BUTTON, "donePage" SECTION DISAPPEARS, "highScorePage" SECTION APPEARS, WITH SCOREBOARD
@@ -94,7 +101,7 @@ function saveScore () {
 
     var userScoreString = JSON.stringify(userScore);
     localStorage.setItem("userScore", userScoreString);
-}
+
 
 
 function renderLastScore () {
@@ -104,20 +111,26 @@ function renderLastScore () {
         document.getElementById("generateFinalScore").innerHTML = lastScore.score;
         document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
     } else {
-        return;
+        submitScoreBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        saveScore();
+        renderLastScore();
+        });
+        
+        renderLastScore();
+
     }
-}
+}}
 
 
 
 //processes----------------------------------------------------------------
 
-submitButton.addEventListener("click", function(event) {
-    event.preventDefault();
-    saveScore();
-    renderLastScore();
-});
-
-renderLastScore();
+//submitScoreBtn.addEventListener("click", function(event) {
+ //   event.preventDefault();
+ //   saveScore();
+ //   renderLastScore();
+//);
+//renderLastScore();
 
 
