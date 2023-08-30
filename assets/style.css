@@ -7,26 +7,6 @@ background-color: pink;
 --centered: center;
 }
 
-body {
-}
-
-
-.frontPage {
-
-}
-
-.quizPage {
-
-}
-
-.donePage {
-
-}
-
-.highScorePage {
-    
-}
-
 
 .question {
     font-size: var(--largest-font);
@@ -46,10 +26,11 @@ margin: 100px 100px 20px 100px;
 }
 
 .h2El {
-font-size: var(--large-font);
-text-align: var(--centered);
-font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
+    font-size: var(--larger-font);
+    text-align: var(--centered);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 100px 100px 20px 100px;
+    }
 
 #pageSwitcher {
 text-align: var(--centered);
@@ -58,21 +39,16 @@ font-size: var(--larger-font);
 text-transform:uppercase;
 }
 
-.listEl {
+.btn {
 margin: 100px;
 font-size: var(--large-font);
 text-align: var(--centered);
 font-family:Verdana, Geneva, Tahoma, sans-serif;
+border-radius: 5px;
 }
 
-#correctAnswerBtn {
-background-color: var(--list-color);
-font-size: var(--large-font);
-}
-
-#wrongAnswerBtn {
-background-color: var(--list-color);
-font-size: var(--large-font);
+.btn:hover {
+    border-color: purple;
 }
 
 #generateFinalScore {
@@ -101,7 +77,6 @@ font-size: var(--larger-font);
 margin: 100px 100px 100px 200px;
 }
 
-
 #timer {
 position: fixed;
 top: 0;
@@ -109,7 +84,7 @@ right: 0;
 font-size: var(--large-font);
 }
 
-#viewHighScore {
+#viewScore {
 position: fixed;
 top: 0;
 left: 0;
