@@ -15,15 +15,15 @@ const timeEl = document.getElementById("timer");
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
 
-var secondsLeft = 100;
-var wrongAnswerDeduction = 2;
-var pointsGain = 4;
+const secondsLeft = 100;
+const wrongAnswerDeduction = 2;
+const pointsGain = 4;
 
 //functions----------------------------------------------------------------
 //------------------------------DEFAULT HOME PAGE SHOWS ONLY THE <header>
 
 function defaultHomepage() {
-    var elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
+    const elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
 
     if (headerEl.style.display !== "none") {
         for (var i = 0; i < elementSections.length; i++) {
@@ -54,10 +54,10 @@ const quizQuestions = [{
 },
 
 {
-    question: "What keywords can we use to declare variables?",
+    question: "What keywords can we use to declare constiables?",
     answers: [{ text: "1. let", correct: false },
-    { text: "2. const, let, var", correct: true },
-    { text: "3. const, var", correct: false },
+    { text: "2. const, let, const", correct: true },
+    { text: "3. const, const", correct: false },
     { text: "4. let, me, be", correct: false }]
 },
 
@@ -90,7 +90,7 @@ const quizQuestions = [{
     question: "How would you call the function, PipPipDoodlyDoo?",
     answers: [{ text: "1. document.call.PipPipDoodlyDoo[];", correct: false },
     { text: "2. PipPipDoodlyDoo();", correct: true },
-    { text: "3. var PipPipDoodlyDoo = function() {}", correct: false },
+    { text: "3. const PipPipDoodlyDoo = function() {}", correct: false },
     { text: "4. function PipPipDoodlyDoo(x,y) {}", correct: false }]
 },
 
@@ -120,23 +120,42 @@ const quizQuestions = [{
 firstBtn.addEventListener("click", () => {
     headerEl.style.display = "none";
     firstSectionEl.style.display = "block";
+    setTime();
+    displayQuestion();
 })
 
 const questionEl = document.querySelector(".question");
 const answerBtnsEl = document.querySelector(".answer-buttons");
 const answerBtn = document.querySelector(".btn");
-let currentQuestionIndex
+let currentQuestionIndex = 0
+
+
+// click the start button --> display question and choices
+
+
+function displayQuestion () {
+document.querySelector(".answer-buttons").innerHTML = "";
+var currentQuestion = quizQuestions[currentQuestionIndex]
+document.querySelector(".question").textContent = currentQuestion.question
+for (var i = 0; i < currentQuestion.answers.length; i++) {
+    var choiceButton = document.createElement("button");
+    choiceButton.textContent = currentQuestion.answers[i].text;
+    choiceButton.addEventListener("click", function() {
+        currentQuestionIndex++;
+        displayQuestion();
+    }) 
+    choiceButton.classList.add("btn");
+    document.querySelector(".answer-buttons").append(choiceButton);
+}
+}
+
 
 
 function startQuiz() {
 for (var i = 0; i <quizQuestions.length; i++) {
     quizQuestions[i];
-    setTime();
 }
 }
-
-startQuiz();
-
 
 function setEachQuestion() {
 quizQuestions.answers.forEach(answer => {
@@ -185,7 +204,10 @@ function setTime() {
         //need comment
         //}
 
-        if (secondsLeft === 0); {
+        var check = secondsLeft === 0
+
+
+        if (check) {
             //clearInterval(timerInterval);
             secondSectionEl.style.display = "block";
             firstSectionEl.style.display = "none";
@@ -202,18 +224,18 @@ function setTime() {
 
 
 function saveScore() {
-    var userScore = {
+    const userScore = {
         score: score.value,
         initials: initials.value.trim()
     };
 
-    var userScoreString = JSON.stringify(userScore);
+    const userScoreString = JSON.stringify(userScore);
     localStorage.setItem("userScore", userScoreString);
-
+}
 
 
     function renderLastScore() {
-        var lastScore = JSON.parse(localStorage.getItem("userScore"));
+        const lastScore = JSON.parse(localStorage.getItem("userScore"));
 
         if (userScore !== null) {
             document.getElementById("generateFinalScore").innerHTML = lastScore.score;
@@ -229,7 +251,7 @@ function saveScore() {
 
         }
     }
-}
+
 
 
 
@@ -241,6 +263,6 @@ saveScore();
 renderLastScore();
 });
 
-renderLastScore();
+//renderLastScore();
 
 
