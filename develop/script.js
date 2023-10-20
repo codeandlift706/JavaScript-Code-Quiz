@@ -104,7 +104,7 @@ const quizQuestions = [{
 //display homepage
 function defaultHomepage() {
     const elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
-    
+
     if (headerEl.style.display !== "none") {
         for (let i = 0; i < elementSections.length; i++) {
             elementSections[i].style.display = "none";
@@ -140,7 +140,7 @@ function displayQuestion() {
 
         choiceButton.addEventListener("click", function () { //on click
             const messagePopUp = document.createElement("p"); //create a p for every answer
-            document.querySelector(".message").innerHTML = ""; //reset the buttons to show nothing
+            document.querySelector(".message").innerHTML = ""; //reset the correct/incorrect message to show nothing
 
             //for each answer you select
             if (quizAnswer === true) { //if answer.correct is true
@@ -161,8 +161,7 @@ function displayQuestion() {
                 // return quizScore;
             }
 
-
-            displayQuestion(); //repeat this process
+            displayQuestion(); //repeat this whole process
 
         })
 
@@ -173,6 +172,7 @@ function displayQuestion() {
 
 }
 
+//NEED TO ADD: CHECK IF LAST QUESTION!!!!!
 
 
 //------------------------------ENTER INITIALS AND HIT THE SUBMIT BUTTON, "donePage" SECTION DISAPPEARS, "highScorePage" SECTION APPEARS, WITH SCOREBOARD
