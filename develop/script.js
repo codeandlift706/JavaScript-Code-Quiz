@@ -1,4 +1,4 @@
-//global variables----------------------------------------------------------------
+//global variables
 const headerEl = document.querySelector(".frontPage");
 const firstSectionEl = document.querySelector(".quizPage");
 const secondSectionEl = document.querySelector(".donePage");
@@ -10,34 +10,21 @@ const retakeBtn = document.getElementById("retakeQuizbtn");
 const resetScoreboardBtn = document.getElementById("resetScoreBoardbtn");
 
 const timeEl = document.getElementById("timer");
+const scoreEl = document.getElementById("viewScore");
 
+const questionEl = document.querySelector(".question");
+const answerBtnsEl = document.querySelector(".answer-buttons");
+const answerBtn = document.querySelector(".btn");
+let currentQuestionIndex = 0
 
+let timerSeconds = 100;
+const startingScore = 0;
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
-
-const secondsLeft = 100;
-const wrongAnswerDeduction = 2;
-const pointsGain = 4;
-
-//functions----------------------------------------------------------------
-//------------------------------DEFAULT HOME PAGE SHOWS ONLY THE <header>
-
-function defaultHomepage() {
-    const elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
-
-    if (headerEl.style.display !== "none") {
-        for (var i = 0; i < elementSections.length; i++) {
-        elementSections[i].style.display = "none";
-        }
-    }
-}
-defaultHomepage();
-
-
-//----------------------------------------------------------------QUESTIONS TO BE ASKED
+const answerPoints = 5;
 
 const quizQuestions = [{
-
+    
     question: "What is JavaScript used for?",
     answers: [{ text: "1. It lets us question the meaning of our lives as we try to build out a quiz application", correct: false },
     { text: "2. It lets us designate any object as a primitive type, so we can manipulate it as needed", correct: false },
@@ -54,7 +41,7 @@ const quizQuestions = [{
 },
 
 {
-    question: "What keywords can we use to declare constiables?",
+    question: "What keywords can we use to declare variables?",
     answers: [{ text: "1. let", correct: false },
     { text: "2. const, let, const", correct: true },
     { text: "3. const, const", correct: false },
@@ -96,7 +83,7 @@ const quizQuestions = [{
 
 
 {
-    question: "What method can I use to locate a specific class element in my HTML?",
+    question: "What method can I use to locate a specific class?",
     answers: [{ text: "1. querySelectorAll()", correct: false },
     { text: "2. getElementById()", correct: false },
     { text: "3. querySelector()", correct: true },
@@ -114,115 +101,75 @@ const quizQuestions = [{
 ]
 
 
-//------------------------------WHEN YOU CLICK THE START BUTTON, <HEADER> DISAPPEARS, "quizPage" SECTION APPEARS, TIMER STARTS, TIMER (-5) IF THE USER SELECTS WRONG ANSWER. WHEN TIMER ENDS, "quizPage" SECTION DISAPPEARS, "donePage" SECTION APPEARS
+//functions
+//display homepage
+function defaultHomepage() {
+    const elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
 
-
-firstBtn.addEventListener("click", () => {
-    headerEl.style.display = "none";
-    firstSectionEl.style.display = "block";
-    setTime();
-    displayQuestion();
-})
-
-const questionEl = document.querySelector(".question");
-const answerBtnsEl = document.querySelector(".answer-buttons");
-const answerBtn = document.querySelector(".btn");
-let currentQuestionIndex = 0
-
-
-// click the start button --> display question and choices
-
-
-function displayQuestion () {
-document.querySelector(".answer-buttons").innerHTML = "";
-var currentQuestion = quizQuestions[currentQuestionIndex]
-document.querySelector(".question").textContent = currentQuestion.question
-for (var i = 0; i < currentQuestion.answers.length; i++) {
-    var choiceButton = document.createElement("button");
-    choiceButton.textContent = currentQuestion.answers[i].text;
-    choiceButton.addEventListener("click", function() {
-        currentQuestionIndex++;
-        displayQuestion();
-    }) 
-    choiceButton.classList.add("btn");
-    document.querySelector(".answer-buttons").append(choiceButton);
-}
-}
-
-
-
-function startQuiz() {
-for (var i = 0; i <quizQuestions.length; i++) {
-    quizQuestions[i];
-}
-}
-
-function setEachQuestion() {
-quizQuestions.answers.forEach(answer => {
-    const button = document.createElement('button')
-    button.innerText = answer.text
-    button.classList.add('btn')
-
-    if (answer.correct) {
-        button.dataset.correct = answer.correct
-    }
-    button.addEventListener("click", selectAnswer)
-    answerBtnsEl.appendChild(button)
-})}
-
-
-function selectAnswer(x) {
-    const selectedButton = x.target
-    const correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
-    Array.from(answerBtnsEl.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-    if (shuffledQuestions.length = currentQuestionIndex) {
-        firstSectionEl.style.display = "none";
-        secondSectionEl.style.display = "block";
-    }
-
-}
-
-
-//----------------------------------------------------------------TIMER
-
-
-function setTime() {
-    var secondsLeft = 100;
-
-    var timerInterval = setInterval(function () {
-        secondsLeft--;
-        timeEl.textContent = "Time: " + secondsLeft;
-
-        //if((secondsLeft > 2) && (wrongAnswerDeduction)) {
-        //((secondsLeft--) - 2);
-        //}
-
-        //else if (pointsGain) {
-        //need comment
-        //}
-
-        var check = secondsLeft === 0
-
-
-        if (check) {
-            //clearInterval(timerInterval);
-            secondSectionEl.style.display = "block";
-            firstSectionEl.style.display = "none";
-
+    if (headerEl.style.display !== "none") {
+        for (let i = 0; i < elementSections.length; i++) {
+            elementSections[i].style.display = "none";
         }
+    }
+}
+defaultHomepage();
+
+
+// display questions and answers
+function displayQuestion() {
+
+    document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
+    const currentQuestion = quizQuestions[currentQuestionIndex] //start at index 0 for quiz questions to display
+    document.querySelector(".question").textContent = currentQuestion.question
+
+    for (let i = 0; i < currentQuestion.answers.length; i++) { //loop through each answer
+        const choiceButton = document.createElement("button"); //create a button for each answer
+        choiceButton.textContent = currentQuestion.answers[i].text; //show the answers on the button
+
+        choiceButton.addEventListener("click", function () { //on click
+            currentQuestionIndex++; //go to the next question
+
+            let quizAnswer = currentQuestion.answers[i].correct;
+            console.log(quizAnswer);
+            
+            //for each answer you select
+            if (quizAnswer === true) { //if answer.correct is true and there's at least 1 second left
+                console.log("Correct!");
+                console.log(answerPoints);
+                let updatedScore = startingScore + answerPoints;
+                console.log(updatedScore);
+            }
+
+            else if (quizAnswer === false) { //if answer.correct is false and there's at least 6 seconds left
+                console.log("False!");
+                console.log(answerPoints);
+                let updatedScore = startingScore - answerPoints;
+                console.log(updatedScore);
+            }
+
+            displayQuestion(); //repeat this process
+        })
+
+        choiceButton.classList.add("btn");
+        document.querySelector(".answer-buttons").append(choiceButton);
+    }
+}
+
+//timer
+function setTime() {
+    const timerInterval = setInterval(function () {
+        timerSeconds--;
+        timeEl.textContent = "Time: " + timerSeconds;
+        scoreEl.textContent = "Score: " + startingScore;
+
     }, 1000);
 }
-
-
 
 
 //------------------------------ENTER INITIALS AND HIT THE SUBMIT BUTTON, "donePage" SECTION DISAPPEARS, "highScorePage" SECTION APPEARS, WITH SCOREBOARD
 //Hit submit --> stringify the submission, store it to local storage, then retrieve from local storage and parse it, and have it show textcontent in scoreboard
 
-
+//save score - collect score, set to local storage
 function saveScore() {
     const userScore = {
         score: score.value,
@@ -233,34 +180,41 @@ function saveScore() {
     localStorage.setItem("userScore", userScoreString);
 }
 
+//render score by retrieving from local storage
+function renderLastScore() {
+    const lastScore = JSON.parse(localStorage.getItem("userScore"));
 
-    function renderLastScore() {
-        const lastScore = JSON.parse(localStorage.getItem("userScore"));
-
-        if (userScore !== null) {
-            document.getElementById("generateFinalScore").innerHTML = lastScore.score;
-            document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
-        } else {
-            submitScoreBtn.addEventListener("click", function (event) {
-                event.preventDefault();
-                saveScore();
-                renderLastScore();
-            });
-
+    if (userScore !== null) {
+        document.getElementById("generateFinalScore").innerHTML = lastScore.score;
+        document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
+    } else {
+        submitScoreBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            saveScore();
             renderLastScore();
+        });
 
-        }
+        renderLastScore();
+
     }
+}
 
 
+//processes
 
+//start the quiz
+firstBtn.addEventListener("click", () => {
+    headerEl.style.display = "none";
+    firstSectionEl.style.display = "block";
+    setTime();
+    displayQuestion();
+})
 
-//processes----------------------------------------------------------------
-
-submitScoreBtn.addEventListener("click", function(event) {
-event.preventDefault();
-saveScore();
-renderLastScore();
+//submit score
+submitScoreBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    saveScore();
+    renderLastScore();
 });
 
 //renderLastScore();

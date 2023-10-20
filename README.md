@@ -8,9 +8,9 @@ VS Code to create and manipulate HTML, CSS, and JavaScript for the application t
 
 ## Visuals
 View a screenshot of the application here:
-![Screenshot](QuizPageScreenshot.png)
+![Screenshot](assets/QuizPageScreenshot.png)
 View a screenshot of the VS Code here:
-![Screenshot](VSCodeQuizScreenshot.png)
+![Screenshot](assets/VSCodeQuizScreenshot.png)
 
 
 ## Credits
