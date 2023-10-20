@@ -18,6 +18,7 @@ const answerBtn = document.querySelector(".btn");
 let currentQuestionIndex = 0
 
 let timerSeconds = 100;
+let quizScore = 0;
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
 
@@ -103,7 +104,7 @@ const quizQuestions = [{
 //display homepage
 function defaultHomepage() {
     const elementSections = [firstSectionEl, secondSectionEl, thirdSectionEl];
-
+    
     if (headerEl.style.display !== "none") {
         for (let i = 0; i < elementSections.length; i++) {
             elementSections[i].style.display = "none";
@@ -112,8 +113,15 @@ function defaultHomepage() {
 }
 defaultHomepage();
 
-let quizScore = 0;
 
+//timer
+function setTime() {
+    const timerInterval = setInterval(function () {
+        timerSeconds--;
+        timeEl.textContent = "Time: " + timerSeconds;
+        scoreEl.textContent = "Score: " + quizScore;
+    }, 1000);
+}
 
 // display questions and answers
 function displayQuestion() {
@@ -131,10 +139,14 @@ function displayQuestion() {
         // console.log(quizAnswer);
 
         choiceButton.addEventListener("click", function () { //on click
-            
+            const messagePopUp = document.createElement("p"); //create a p for every answer
+            document.querySelector(".message").innerHTML = ""; //reset the buttons to show nothing
+
             //for each answer you select
             if (quizAnswer === true) { //if answer.correct is true
                 console.log("Correct!");
+                messagePopUp.textContent = correctMessage;
+                document.querySelector(".message").append(messagePopUp);
                 quizScore += 5;
                 currentQuestionIndex++; //go to the next question
                 // return quizScore;
@@ -142,10 +154,13 @@ function displayQuestion() {
 
             else if (quizAnswer === false) { //if answer.correct is false 
                 console.log("False!");
+                messagePopUp.textContent = wrongMessage;
+                document.querySelector(".message").append(messagePopUp);
                 quizScore -= 5;
                 currentQuestionIndex++; //go to the next question
                 // return quizScore;
             }
+
 
             displayQuestion(); //repeat this process
 
@@ -158,15 +173,6 @@ function displayQuestion() {
 
 }
 
-//timer
-function setTime() {
-    const timerInterval = setInterval(function () {
-        timerSeconds--;
-        timeEl.textContent = "Time: " + timerSeconds;
-        scoreEl.textContent = "Score: " + quizScore;
-
-    }, 1000);
-}
 
 
 //------------------------------ENTER INITIALS AND HIT THE SUBMIT BUTTON, "donePage" SECTION DISAPPEARS, "highScorePage" SECTION APPEARS, WITH SCOREBOARD
