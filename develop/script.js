@@ -18,13 +18,11 @@ const answerBtn = document.querySelector(".btn");
 let currentQuestionIndex = 0
 
 let timerSeconds = 100;
-const startingScore = 0;
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
-const answerPoints = 5;
 
 const quizQuestions = [{
-    
+
     question: "What is JavaScript used for?",
     answers: [{ text: "1. It lets us question the meaning of our lives as we try to build out a quiz application", correct: false },
     { text: "2. It lets us designate any object as a primitive type, so we can manipulate it as needed", correct: false },
@@ -114,6 +112,8 @@ function defaultHomepage() {
 }
 defaultHomepage();
 
+let quizScore = 0;
+
 
 // display questions and answers
 function displayQuestion() {
@@ -123,36 +123,39 @@ function displayQuestion() {
     document.querySelector(".question").textContent = currentQuestion.question
 
     for (let i = 0; i < currentQuestion.answers.length; i++) { //loop through each answer
+
         const choiceButton = document.createElement("button"); //create a button for each answer
         choiceButton.textContent = currentQuestion.answers[i].text; //show the answers on the button
 
-        choiceButton.addEventListener("click", function () { //on click
-            currentQuestionIndex++; //go to the next question
+        let quizAnswer = currentQuestion.answers[i].correct; //access the true and false values
+        // console.log(quizAnswer);
 
-            let quizAnswer = currentQuestion.answers[i].correct;
-            console.log(quizAnswer);
+        choiceButton.addEventListener("click", function () { //on click
             
             //for each answer you select
-            if (quizAnswer === true) { //if answer.correct is true and there's at least 1 second left
+            if (quizAnswer === true) { //if answer.correct is true
                 console.log("Correct!");
-                console.log(answerPoints);
-                let updatedScore = startingScore + answerPoints;
-                console.log(updatedScore);
+                quizScore += 5;
+                currentQuestionIndex++; //go to the next question
+                // return quizScore;
             }
 
-            else if (quizAnswer === false) { //if answer.correct is false and there's at least 6 seconds left
+            else if (quizAnswer === false) { //if answer.correct is false 
                 console.log("False!");
-                console.log(answerPoints);
-                let updatedScore = startingScore - answerPoints;
-                console.log(updatedScore);
+                quizScore -= 5;
+                currentQuestionIndex++; //go to the next question
+                // return quizScore;
             }
 
             displayQuestion(); //repeat this process
+
         })
 
         choiceButton.classList.add("btn");
         document.querySelector(".answer-buttons").append(choiceButton);
+
     }
+
 }
 
 //timer
@@ -160,7 +163,7 @@ function setTime() {
     const timerInterval = setInterval(function () {
         timerSeconds--;
         timeEl.textContent = "Time: " + timerSeconds;
-        scoreEl.textContent = "Score: " + startingScore;
+        scoreEl.textContent = "Score: " + quizScore;
 
     }, 1000);
 }
