@@ -18,10 +18,11 @@ const answerBtnsEl = document.querySelector(".answer-buttons");
 const answerBtn = document.querySelector(".btn");
 let currentQuestionIndex = 0
 
-let timerSeconds = 5;
+let timerSeconds = 2;
 let quizScore = 0;
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
+const doneMessage = "All done!";
 
 const quizQuestions = [{
 
@@ -118,11 +119,11 @@ defaultHomepage();
 
 // display questions and render buttons
 function displayQuestion() {
-    
+
     document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
     const currentQuestion = quizQuestions[currentQuestionIndex] //start at index 0 for quiz questions to display
-    document.querySelector(".question").textContent = currentQuestion.question
-    
+    document.querySelector(".question").textContent = currentQuestion.question //show the current question
+
     for (let i = 0; i < currentQuestion.answers.length; i++) { //loop through each answer
 
         const choiceButton = document.createElement("button"); //create a button for each answer
@@ -139,10 +140,11 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
     //NEED TO ADD:
     //if last question, display last question!!!!!!!!!!!!!!!!!!
 
+
     choiceButton.addEventListener("click", function () { //on click
         const messagePopUp = document.createElement("p"); //create a p for every answer
         document.querySelector(".message").innerHTML = ""; //reset the correct/incorrect message to show nothing
-        
+
         //for each answer you select
         if (quizAnswer) { //if answer.correct is true
             console.log("Correct!");
@@ -152,20 +154,20 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
             currentQuestionIndex++; //go to the next question
             // return quizScore;
         }
-        
+
         else if (!quizAnswer) { //if answer.correct is false 
             console.log("False!");
             messagePopUp.textContent = wrongMessage;
             document.querySelector(".message").append(messagePopUp);
-            quizScore -= 5;
+            quizScore -= 5; //HOW DO I MAKE IT SO THAT IT CAN'T GO NEGATIVE?????
             currentQuestionIndex++; //go to the next question
             // return quizScore;
         }
-        
+
         displayQuestion(); //repeat this whole process
-        
+
     })
-    
+
     choiceButton.classList.add("btn");
     document.querySelector(".answer-buttons").append(choiceButton);
 
@@ -181,55 +183,45 @@ function setTime() {
         timerSeconds--;
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
-        
-        if (timerSeconds === 0) {
-            clearInterval(timerInterval);
-        }
+
+        // HOW DO I SUBTRACT TIME FROM TIMER FOR EVERY WRONG ANSWER?????????????????/
         // for (let i = 0; i < quizQuestions.length; i++) {
         //     let quizTrue = quizQuestions.answers[i].correct;
         //     if (quizTrue === true) { //if answer.correct is true
         //         timerSeconds += 10;
         //     }
-            
+
         //     else if (quizTrue === false) { //if answer.correct is false 
         //         timerSeconds -= 10;
         //     }
         // }
-
-        // if (timerSeconds === 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
-        //     quizPage.style.display = "none"; //hide quiz page
-        //     donePage.style.display = "block"; //display submit initials page
-    
-        //     const userScore = { //create userScore object with properties
-        //         score: quizScore.value,
-        //         initials: initialsInput.text.trim()
-        //     };
-            
-        //     const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
-        //     localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
-        // };
+        if (timerSeconds === 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
+            clearInterval(timerInterval);
+            saveScore(quizScore);
+        }
     }, 1000);
 }
 
 
 // //save score - collect score, submit score and initials, set to local storage
-// function saveScore(quizScore) {
-    
-//     if (timerSeconds = 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
-//         quizPage.style.display = "none"; //hide quiz page
-//         donePage.style.display = "block"; //display submit initials page
+function saveScore(quizScore) {
 
-//         const userScore = { //create userScore object with properties
-//             score: quizScore.value,
-//             initials: initialsInput.text.trim()
-//         };
-        
-//         const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
-//         localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
-//     };
+//     const initialsInput = document.getElementById("initialsInput");
+// const submitScoreBtn = document.getElementById("submitBtn");
 
-//     return userScoreString;
-// }
+        firstSectionEl.style.display = "none"; //hide quiz page
+        secondSectionEl.style.display = "block"; //display submit initials page
+
+        const userScore = { //create userScore object with properties
+            score: quizScore.value,
+            initials: initialsInput.value
+        };
+
+        const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
+        localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
+
+    return userScoreString;
+}
 
 
 // //render score by retrieving from local storage
