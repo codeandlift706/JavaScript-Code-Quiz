@@ -114,6 +114,67 @@ function defaultHomepage() {
 defaultHomepage();
 
 
+
+// display questions and answers per button
+function displayQuestion() {
+    
+    document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
+    const currentQuestion = quizQuestions[currentQuestionIndex] //start at index 0 for quiz questions to display
+    document.querySelector(".question").textContent = currentQuestion.question
+    
+    for (let i = 0; i < currentQuestion.answers.length; i++) { //loop through each answer
+
+        const choiceButton = document.createElement("button"); //create a button for each answer
+        choiceButton.textContent = currentQuestion.answers[i].text; //show the answers on the button
+        
+        let quizAnswer = currentQuestion.answers[i].correct; //access the true and false values
+        // console.log(quizAnswer);
+        selectQuestion(choiceButton, quizAnswer);
+    }
+};
+
+
+//select answers
+function selectQuestion(choiceButton, quizAnswer) {
+    
+    choiceButton.addEventListener("click", function () { //on click
+        const messagePopUp = document.createElement("p"); //create a p for every answer
+        document.querySelector(".message").innerHTML = ""; //reset the correct/incorrect message to show nothing
+        
+        //for each answer you select
+        if (quizAnswer === true) { //if answer.correct is true
+            console.log("Correct!");
+            messagePopUp.textContent = correctMessage;
+            document.querySelector(".message").append(messagePopUp);
+            quizScore += 5;
+            currentQuestionIndex++; //go to the next question
+            // return quizScore;
+        }
+        
+        else if (quizAnswer === false) { //if answer.correct is false 
+            console.log("False!");
+            messagePopUp.textContent = wrongMessage;
+            document.querySelector(".message").append(messagePopUp);
+            quizScore -= 5;
+            currentQuestionIndex++; //go to the next question
+            // return quizScore;
+        }
+        
+        displayQuestion(); //repeat this whole process
+        
+    })
+    
+    choiceButton.classList.add("btn");
+    document.querySelector(".answer-buttons").append(choiceButton);
+}
+
+//NEED TO PASS SCORE
+//NEED TO ADD:
+//if last question, display last question
+//if timer runs out, next function executes
+//pass score to next function
+
+
 //timer
 function setTime() {
     const timerInterval = setInterval(function () {
@@ -121,59 +182,9 @@ function setTime() {
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
     }, 1000);
-}
 
-// display questions and answers
-function displayQuestion() {
-
-    document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
-    const currentQuestion = quizQuestions[currentQuestionIndex] //start at index 0 for quiz questions to display
-    document.querySelector(".question").textContent = currentQuestion.question
-
-    for (let i = 0; i < currentQuestion.answers.length; i++) { //loop through each answer
-
-        const choiceButton = document.createElement("button"); //create a button for each answer
-        choiceButton.textContent = currentQuestion.answers[i].text; //show the answers on the button
-
-        let quizAnswer = currentQuestion.answers[i].correct; //access the true and false values
-        // console.log(quizAnswer);
-
-        choiceButton.addEventListener("click", function () { //on click
-            const messagePopUp = document.createElement("p"); //create a p for every answer
-            document.querySelector(".message").innerHTML = ""; //reset the correct/incorrect message to show nothing
-
-            //for each answer you select
-            if (quizAnswer === true) { //if answer.correct is true
-                console.log("Correct!");
-                messagePopUp.textContent = correctMessage;
-                document.querySelector(".message").append(messagePopUp);
-                quizScore += 5;
-                currentQuestionIndex++; //go to the next question
-                // return quizScore;
-            }
-
-            else if (quizAnswer === false) { //if answer.correct is false 
-                console.log("False!");
-                messagePopUp.textContent = wrongMessage;
-                document.querySelector(".message").append(messagePopUp);
-                quizScore -= 5;
-                currentQuestionIndex++; //go to the next question
-                // return quizScore;
-            }
-
-            displayQuestion(); //repeat this whole process
-
-        })
-
-        choiceButton.classList.add("btn");
-        document.querySelector(".answer-buttons").append(choiceButton);
-
-    }
 
 }
-
-//NEED TO ADD: CHECK IF LAST QUESTION!!!!!
-
 
 //------------------------------ENTER INITIALS AND HIT THE SUBMIT BUTTON, "donePage" SECTION DISAPPEARS, "highScorePage" SECTION APPEARS, WITH SCOREBOARD
 //Hit submit --> stringify the submission, store it to local storage, then retrieve from local storage and parse it, and have it show textcontent in scoreboard
@@ -184,7 +195,7 @@ function saveScore() {
         score: score.value,
         initials: initials.value.trim()
     };
-
+    
     const userScoreString = JSON.stringify(userScore);
     localStorage.setItem("userScore", userScoreString);
 }
