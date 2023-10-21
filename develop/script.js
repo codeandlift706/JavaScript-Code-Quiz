@@ -18,7 +18,7 @@ const answerBtnsEl = document.querySelector(".answer-buttons");
 const answerBtn = document.querySelector(".btn");
 let currentQuestionIndex = 0
 
-let timerSeconds = 100;
+let timerSeconds = 5;
 let quizScore = 0;
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
@@ -182,6 +182,9 @@ function setTime() {
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
         
+        if (timerSeconds === 0) {
+            clearInterval(timerInterval);
+        }
         // for (let i = 0; i < quizQuestions.length; i++) {
         //     let quizTrue = quizQuestions.answers[i].correct;
         //     if (quizTrue === true) { //if answer.correct is true
@@ -192,47 +195,58 @@ function setTime() {
         //         timerSeconds -= 10;
         //     }
         // }
-    }, 1000);
 
-    saveScore(quizScore);
-}
-
-
-//save score - collect score, submit score and initials, set to local storage
-function saveScore(quizScore) {
+        // if (timerSeconds === 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
+        //     quizPage.style.display = "none"; //hide quiz page
+        //     donePage.style.display = "block"; //display submit initials page
     
-    if (timerSeconds = 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
-        quizPage.style.display = "none"; //hide quiz page
-        donePage.style.display = "block"; //display submit initials page
+        //     const userScore = { //create userScore object with properties
+        //         score: quizScore.value,
+        //         initials: initialsInput.text.trim()
+        //     };
+            
+        //     const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
+        //     localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
+        // };
+    }, 1000);
+}
 
-        const userScore = { //create userScore object with properties
-            score: quizScore.value,
-            initials: initialsInput.text.trim()
-        };
+
+// //save score - collect score, submit score and initials, set to local storage
+// function saveScore(quizScore) {
+    
+//     if (timerSeconds = 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
+//         quizPage.style.display = "none"; //hide quiz page
+//         donePage.style.display = "block"; //display submit initials page
+
+//         const userScore = { //create userScore object with properties
+//             score: quizScore.value,
+//             initials: initialsInput.text.trim()
+//         };
         
-        const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
-        localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
-    };
+//         const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
+//         localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
+//     };
 
-    return userScoreString;
-}
+//     return userScoreString;
+// }
 
 
-//render score by retrieving from local storage
-function renderLastScore(userScoreString) {
-    const userScoreString = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+// //render score by retrieving from local storage
+// function renderLastScore(userScoreString) {
+//     const userScoreString = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
 
-    if (userScoreString !== null) {
-        document.getElementById("generateFinalScore").innerHTML = lastScore.score;
-        document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
-    } else {
-        submitScoreBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            saveScore();
-            renderLastScore();
-        });
-    }
-}
+//     if (userScoreString !== null) {
+//         document.getElementById("generateFinalScore").innerHTML = lastScore.score;
+//         document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
+//     } else {
+//         submitScoreBtn.addEventListener("click", function (event) {
+//             event.preventDefault();
+//             saveScore();
+//             renderLastScore();
+//         });
+//     }
+// }
 
 
 //processes
