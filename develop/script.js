@@ -5,6 +5,7 @@ const secondSectionEl = document.querySelector(".donePage");
 const thirdSectionEl = document.querySelector(".highScorePage");
 
 const firstBtn = document.getElementById("pageSwitcher");
+const initialsInput = document.getElementById("initialsInput");
 const submitScoreBtn = document.getElementById("submitBtn");
 const retakeBtn = document.getElementById("retakeQuizbtn");
 const resetScoreboardBtn = document.getElementById("resetScoreBoardbtn");
@@ -115,7 +116,7 @@ defaultHomepage();
 
 
 
-// display questions and answers per button
+// display questions and render buttons
 function displayQuestion() {
     
     document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
@@ -126,23 +127,24 @@ function displayQuestion() {
 
         const choiceButton = document.createElement("button"); //create a button for each answer
         choiceButton.textContent = currentQuestion.answers[i].text; //show the answers on the button
-        
         let quizAnswer = currentQuestion.answers[i].correct; //access the true and false values
-        // console.log(quizAnswer);
-        selectQuestion(choiceButton, quizAnswer);
+
+        selectQuestion(choiceButton, quizAnswer); //pass buttons and true/false values
     }
 };
 
 
 //select answers
-function selectQuestion(choiceButton, quizAnswer) {
-    
+function selectQuestion(choiceButton, quizAnswer) { //receive
+    //NEED TO ADD:
+    //if last question, display last question!!!!!!!!!!!!!!!!!!
+
     choiceButton.addEventListener("click", function () { //on click
         const messagePopUp = document.createElement("p"); //create a p for every answer
         document.querySelector(".message").innerHTML = ""; //reset the correct/incorrect message to show nothing
         
         //for each answer you select
-        if (quizAnswer === true) { //if answer.correct is true
+        if (quizAnswer) { //if answer.correct is true
             console.log("Correct!");
             messagePopUp.textContent = correctMessage;
             document.querySelector(".message").append(messagePopUp);
@@ -151,7 +153,7 @@ function selectQuestion(choiceButton, quizAnswer) {
             // return quizScore;
         }
         
-        else if (quizAnswer === false) { //if answer.correct is false 
+        else if (!quizAnswer) { //if answer.correct is false 
             console.log("False!");
             messagePopUp.textContent = wrongMessage;
             document.querySelector(".message").append(messagePopUp);
@@ -166,13 +168,11 @@ function selectQuestion(choiceButton, quizAnswer) {
     
     choiceButton.classList.add("btn");
     document.querySelector(".answer-buttons").append(choiceButton);
+
+    return quizScore; //pass quizScore
 }
 
-//NEED TO PASS SCORE
-//NEED TO ADD:
-//if last question, display last question
-//if timer runs out, next function executes
-//pass score to next function
+
 
 
 //timer
@@ -181,30 +181,48 @@ function setTime() {
         timerSeconds--;
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
+        
+        // for (let i = 0; i < quizQuestions.length; i++) {
+        //     let quizTrue = quizQuestions.answers[i].correct;
+        //     if (quizTrue === true) { //if answer.correct is true
+        //         timerSeconds += 10;
+        //     }
+            
+        //     else if (quizTrue === false) { //if answer.correct is false 
+        //         timerSeconds -= 10;
+        //     }
+        // }
     }, 1000);
 
-
+    saveScore(quizScore);
 }
 
-//------------------------------ENTER INITIALS AND HIT THE SUBMIT BUTTON, "donePage" SECTION DISAPPEARS, "highScorePage" SECTION APPEARS, WITH SCOREBOARD
-//Hit submit --> stringify the submission, store it to local storage, then retrieve from local storage and parse it, and have it show textcontent in scoreboard
 
-//save score - collect score, set to local storage
-function saveScore() {
-    const userScore = {
-        score: score.value,
-        initials: initials.value.trim()
-    };
+//save score - collect score, submit score and initials, set to local storage
+function saveScore(quizScore) {
     
-    const userScoreString = JSON.stringify(userScore);
-    localStorage.setItem("userScore", userScoreString);
+    if (timerSeconds = 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
+        quizPage.style.display = "none"; //hide quiz page
+        donePage.style.display = "block"; //display submit initials page
+
+        const userScore = { //create userScore object with properties
+            score: quizScore.value,
+            initials: initialsInput.text.trim()
+        };
+        
+        const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
+        localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
+    };
+
+    return userScoreString;
 }
+
 
 //render score by retrieving from local storage
-function renderLastScore() {
-    const lastScore = JSON.parse(localStorage.getItem("userScore"));
+function renderLastScore(userScoreString) {
+    const userScoreString = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
 
-    if (userScore !== null) {
+    if (userScoreString !== null) {
         document.getElementById("generateFinalScore").innerHTML = lastScore.score;
         document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
     } else {
@@ -213,30 +231,26 @@ function renderLastScore() {
             saveScore();
             renderLastScore();
         });
-
-        renderLastScore();
-
     }
 }
 
 
 //processes
-
 //start the quiz
 firstBtn.addEventListener("click", () => {
     headerEl.style.display = "none";
     firstSectionEl.style.display = "block";
     setTime();
     displayQuestion();
-})
+});
 
-//submit score
-submitScoreBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    saveScore();
+//submit score button
+submitScoreBtn.addEventListener("click", () => {
+    donePage.style.display = "none";
+    highScorePage.style.display = "block";
+    preventDefault();
     renderLastScore();
 });
 
-//renderLastScore();
 
 
