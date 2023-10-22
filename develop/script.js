@@ -209,27 +209,23 @@ function setTime() {
 // //save score - collect score, submit score and initials, set to local storage
 function saveScore(quizScore) {
 
-    // const initialsInput = document.getElementById("initialsInput");
-    // const submitScoreBtn = document.getElementById("submitBtn");
-
     firstSectionEl.style.display = "none"; //hide quiz page
     secondSectionEl.style.display = "block"; //display submit initials page
     finalScore.textContent = "Your final score is: " + quizScore;
 
     console.log(quizScore);
     return quizScore;
-    
 }
 
 
 // // //render score by retrieving from local storage
 // //take score, and render to the scoreboard div as a list item. Create array to hold userScores, Create list and push scores into array, order them by their score ranking
-function renderScore() {
+function renderScore(e) {
+e.preventDefault();
 
-    console.log(quizScore);
     // firstSectionEl.style.display = "none";
-    // secondSectionEl.style.display = "none"; //hide submit initials page
-    // thirdSectionEl.style.display = "block"; //display the scoreboard page
+    secondSectionEl.style.display = "none"; //hide submit initials page
+    thirdSectionEl.style.display = "block"; //display the scoreboard page
     
     const userScore = { //create userScore object with properties
         score: quizScore,
@@ -267,11 +263,9 @@ firstBtn.addEventListener("click", () => {
 });
 
 //submit score
-submitScoreBtn.addEventListener("click", () => {
-    secondSectionEl.style.display = "none";
-    thirdSectionEl.style.display = "block";
-    renderScore();
-});
+submitScoreBtn.addEventListener("click", renderScore);
+    // secondSectionEl.style.display = "none";
+    // thirdSectionEl.style.display = "block";
 
 //retake the quiz
 retakeBtn.addEventListener("click", () => {
