@@ -209,7 +209,7 @@ function setTime() {
 // //save score - collect score, submit score and initials, set to local storage
 function saveScore(quizScore) {
 
-    //     const initialsInput = document.getElementById("initialsInput");
+    // const initialsInput = document.getElementById("initialsInput");
     // const submitScoreBtn = document.getElementById("submitBtn");
 
     firstSectionEl.style.display = "none"; //hide quiz page
@@ -228,20 +228,26 @@ function saveScore(quizScore) {
 }
 
 
-// //render score by retrieving from local storage
-// function renderLastScore(userScoreString) {
+// // //render score by retrieving from local storage
+// //take score, and render to the scoreboard div as a list item. Create array to hold userScores, Create list and push scores into array, order them by their score ranking
+// function renderScore(userScoreString) {
+
+//     // firstSectionEl.style.display = "none";
+//     // secondSectionEl.style.display = "none"; //hide submit initials page
+//     // thirdSectionEl.style.display = "block"; //display the scoreboard page
+
 //     const userScoreString = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
 
 //     if (userScoreString !== null) {
-//         document.getElementById("generateFinalScore").innerHTML = lastScore.score;
-//         document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
-//     } else {
-//         submitScoreBtn.addEventListener("click", function (event) {
-//             event.preventDefault();
-//             saveScore();
-//             renderLastScore();
-//         });
-//     }
+
+//         const scoreEntry = document.createElement("li"); //create score entry list element
+//         scoreEntry.textContent = userScoreString //the list element displays userScore
+//         document.querySelector(".scoreBoard").append(scoreEntry); //where it goes on the DOM
+
+//         // document.getElementById("finalScore").innerHTML = lastScore.score;
+//         // document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
+//     } 
+
 // }
 
 
@@ -254,13 +260,23 @@ firstBtn.addEventListener("click", () => {
     displayQuestion();
 });
 
-//submit score button
+//submit score
 submitScoreBtn.addEventListener("click", () => {
-    donePage.style.display = "none";
-    highScorePage.style.display = "block";
+    secondSectionEl.style.display = "none";
+    thirdSectionEl.style.display = "block";
     preventDefault();
-    renderLastScore();
+    renderScore();
 });
 
+//retake the quiz
+retakeBtn.addEventListener("click", () => {
+    thirdSectionEl.style.display = "none";
+    firstSectionEl.style.display = "block";
+    setTime();
+    displayQuestion();
+});
 
-
+//clears the scoreboard
+resetScoreboardBtn.addEventListener("click", () => {
+    document.querySelector(".scoreBoard").innerHTML = "";
+})
