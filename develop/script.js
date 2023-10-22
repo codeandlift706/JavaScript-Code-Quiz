@@ -218,12 +218,10 @@ function saveScore(quizScore) {
 }
 
 
-// // //render score by retrieving from local storage
-// //take score, and render to the scoreboard div as a list item. Create array to hold userScores, Create list and push scores into array, order them by their score ranking
+//render score by retrieving from local storage
 function renderScore(e) {
     e.preventDefault();
 
-    // firstSectionEl.style.display = "none";
     secondSectionEl.style.display = "none"; //hide submit initials page
     thirdSectionEl.style.display = "block"; //display the scoreboard page
 
@@ -232,24 +230,19 @@ function renderScore(e) {
         initials: initialsInput.value
     };
 
-
-    localStorage.setItem("userScore", JSON.stringify(userScore)); //stringify so that it can save in local storage./key name: userScore, value: userScore
-
     //create array to store scores
-    //for each score: create a list element and append to the scoreBoard and store to array, arrange in order by least to greatest (score)
-    scoreArray = [];
-
-    // const scoreEntry = document.createElement("li"); //create score entry list element
-    // scoreEntry.textContent = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+    // scoreArray = [];
+    // for (i = 0; i < scoreArray.length; i++ ) { //iterate over each item in the array. for each score: create a list element and append to the scoreBoard and store to array, arrange in order by least to greatest (score)
+    // scoreArray.push(userScore);
     // console.log(userScore);
 
-    const listEl = document.createElement("li"); //create list element
+    localStorage.setItem("userScore", JSON.stringify(userScore)); //save to local storage - key name: userScore, value: userScore
     JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+
     const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
-
+    const listEl = document.createElement("li"); //create list element
     listEl.textContent = scoreEntry //list element to show data
-    document.querySelector(".scoreBoard").append(scoreEntry); //where it goes on the DOM
-
+    document.querySelector(".scoreBoard").append(scoreEntry); //append list element on the DOM
 
 }
 
@@ -266,7 +259,7 @@ firstBtn.addEventListener("click", () => {
 //submit score
 submitScoreBtn.addEventListener("click", renderScore);
 
-//retake the quiz
+//retake the quiz - score restarts at 0 and questions start over???????????????
 retakeBtn.addEventListener("click", () => {
     thirdSectionEl.style.display = "none";
     firstSectionEl.style.display = "block";
@@ -277,4 +270,5 @@ retakeBtn.addEventListener("click", () => {
 //clears the scoreboard
 resetScoreboardBtn.addEventListener("click", () => {
     document.querySelector(".scoreBoard").innerHTML = "";
+    localStorage.setItem("userScore", JSON.stringify({}));
 })
