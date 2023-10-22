@@ -221,34 +221,35 @@ function saveScore(quizScore) {
 // // //render score by retrieving from local storage
 // //take score, and render to the scoreboard div as a list item. Create array to hold userScores, Create list and push scores into array, order them by their score ranking
 function renderScore(e) {
-e.preventDefault();
+    e.preventDefault();
 
     // firstSectionEl.style.display = "none";
     secondSectionEl.style.display = "none"; //hide submit initials page
     thirdSectionEl.style.display = "block"; //display the scoreboard page
-    
+
     const userScore = { //create userScore object with properties
         score: quizScore,
         initials: initialsInput.value
     };
-    
 
-    localStorage.setItem("userScore", JSON.stringify(userScore) ); //stringify so that it can save in local storage./key name: userScore, value: userScore
-    const getUserScore = JSON.parse( localStorage.getItem("userScore") ); //retrieve from local storage and parse it
+
+    localStorage.setItem("userScore", JSON.stringify(userScore)); //stringify so that it can save in local storage./key name: userScore, value: userScore
 
     //create array to store scores
     //for each score: create a list element and append to the scoreBoard and store to array, arrange in order by least to greatest (score)
     scoreArray = [];
 
-    if (getUserScore !== null) {
+    // const scoreEntry = document.createElement("li"); //create score entry list element
+    // scoreEntry.textContent = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+    // console.log(userScore);
 
-        const scoreEntry = document.createElement("li"); //create score entry list element
-        scoreEntry.textContent = getUserScore //the list element displays userScore
-        document.querySelector(".scoreBoard").append(scoreEntry); //where it goes on the DOM
+    const listEl = document.createElement("li"); //create list element
+    JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+    const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
 
-        // document.getElementById("finalScore").innerHTML = lastScore.score;
-        // document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
-    } 
+    listEl.textContent = scoreEntry //list element to show data
+    document.querySelector(".scoreBoard").append(scoreEntry); //where it goes on the DOM
+
 
 }
 
@@ -264,8 +265,6 @@ firstBtn.addEventListener("click", () => {
 
 //submit score
 submitScoreBtn.addEventListener("click", renderScore);
-    // secondSectionEl.style.display = "none";
-    // thirdSectionEl.style.display = "block";
 
 //retake the quiz
 retakeBtn.addEventListener("click", () => {
