@@ -216,39 +216,45 @@ function saveScore(quizScore) {
     secondSectionEl.style.display = "block"; //display submit initials page
     finalScore.textContent = "Your final score is: " + quizScore;
 
-    const userScore = { //create userScore object with properties
-        score: quizScore.value,
-        initials: initialsInput.value
-    };
-
-    const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
-    localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
-
-    return userScoreString;
+    console.log(quizScore);
+    return quizScore;
+    
 }
 
 
 // // //render score by retrieving from local storage
 // //take score, and render to the scoreboard div as a list item. Create array to hold userScores, Create list and push scores into array, order them by their score ranking
-// function renderScore(userScoreString) {
+function renderScore() {
 
-//     // firstSectionEl.style.display = "none";
-//     // secondSectionEl.style.display = "none"; //hide submit initials page
-//     // thirdSectionEl.style.display = "block"; //display the scoreboard page
+    console.log(quizScore);
+    // firstSectionEl.style.display = "none";
+    // secondSectionEl.style.display = "none"; //hide submit initials page
+    // thirdSectionEl.style.display = "block"; //display the scoreboard page
+    
+    const userScore = { //create userScore object with properties
+        score: quizScore,
+        initials: initialsInput.value
+    };
+    
 
-//     const userScoreString = JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+    localStorage.setItem("userScore", JSON.stringify(userScore) ); //stringify so that it can save in local storage./key name: userScore, value: userScore
+    const getUserScore = JSON.parse( localStorage.getItem("userScore") ); //retrieve from local storage and parse it
 
-//     if (userScoreString !== null) {
+    //create array to store scores
+    //for each score: create a list element and append to the scoreBoard and store to array, arrange in order by least to greatest (score)
+    scoreArray = [];
 
-//         const scoreEntry = document.createElement("li"); //create score entry list element
-//         scoreEntry.textContent = userScoreString //the list element displays userScore
-//         document.querySelector(".scoreBoard").append(scoreEntry); //where it goes on the DOM
+    if (getUserScore !== null) {
 
-//         // document.getElementById("finalScore").innerHTML = lastScore.score;
-//         // document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
-//     } 
+        const scoreEntry = document.createElement("li"); //create score entry list element
+        scoreEntry.textContent = getUserScore //the list element displays userScore
+        document.querySelector(".scoreBoard").append(scoreEntry); //where it goes on the DOM
 
-// }
+        // document.getElementById("finalScore").innerHTML = lastScore.score;
+        // document.getElementById("insertInitialBox").innerHTML = lastScore.initials;
+    } 
+
+}
 
 
 //processes
@@ -264,7 +270,6 @@ firstBtn.addEventListener("click", () => {
 submitScoreBtn.addEventListener("click", () => {
     secondSectionEl.style.display = "none";
     thirdSectionEl.style.display = "block";
-    preventDefault();
     renderScore();
 });
 
