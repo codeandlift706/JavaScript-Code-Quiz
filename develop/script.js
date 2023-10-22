@@ -24,6 +24,9 @@ const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
 const doneMessage = "All done!";
 
+const finalScore = document.getElementById("finalScore");
+
+
 const quizQuestions = [{
 
     question: "What is JavaScript used for?",
@@ -206,19 +209,20 @@ function setTime() {
 // //save score - collect score, submit score and initials, set to local storage
 function saveScore(quizScore) {
 
-//     const initialsInput = document.getElementById("initialsInput");
-// const submitScoreBtn = document.getElementById("submitBtn");
+    //     const initialsInput = document.getElementById("initialsInput");
+    // const submitScoreBtn = document.getElementById("submitBtn");
 
-        firstSectionEl.style.display = "none"; //hide quiz page
-        secondSectionEl.style.display = "block"; //display submit initials page
+    firstSectionEl.style.display = "none"; //hide quiz page
+    secondSectionEl.style.display = "block"; //display submit initials page
+    finalScore.textContent = "Your final score is: " + quizScore;
 
-        const userScore = { //create userScore object with properties
-            score: quizScore.value,
-            initials: initialsInput.value
-        };
+    const userScore = { //create userScore object with properties
+        score: quizScore.value,
+        initials: initialsInput.value
+    };
 
-        const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
-        localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
+    const userScoreString = JSON.stringify(userScore); //stringify so that it can save in local storage
+    localStorage.setItem("userScore", userScoreString); //key name: userScore, value: userScoreString
 
     return userScoreString;
 }
