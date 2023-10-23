@@ -182,7 +182,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
 //timer
 function setTime() {
-    let timerSeconds = 2;
+    let timerSeconds = 3;
 
     const timerInterval = setInterval(function () {
         timerSeconds--;
@@ -235,7 +235,7 @@ function renderScore(e) {
     scoreList.innerHTML = ""; //clear the score list
 
     for (const entry of scoreArray) { //for every entry in scoreArray
-        const scoreEntry = `${entry.initials} ${entry.score}`; //template string to format score entry
+        const scoreEntry = (`${entry.initials} ............................... ${entry.score}`); //template string to format score entry
         const listEl = document.createElement("p");
         listEl.textContent = scoreEntry;
         scoreList.append(listEl);

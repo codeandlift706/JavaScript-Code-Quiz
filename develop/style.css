@@ -45,12 +45,20 @@
 
 .buttonStyle {
 text-align: var(--centered);
-margin: 100px 100px 100px 550px;
-font-size: var(--larger-font);
+margin: 20px;
+font-size: var(--large-font);
 border-radius: 5px;
-text-transform:uppercase;
+/* text-transform:uppercase; */
 display: block;
 } 
+
+
+.answer-buttons {
+    font-size: var(--larger-font);
+    text-align: var(--centered);
+    margin: 100px 100px 20px 100px;
+}
+
 
 .question {
     font-size: var(--largest-font);
@@ -60,23 +68,26 @@ display: block;
     margin: 100px 100px 20px 100px;
 }
 
-/* .answer-buttons {
-    font-size: var(--larger-font);
-    text-align: var(--centered);
-    margin: 100px 100px 20px 100px;
-} */
+.clickContainer {
+    display: flex;
+    justify-content: center;
+}
 
 #initialsInput {
-    font-size: var(--larger-font);
+    font-size: var(--large-font);
     text-align: var(--centered);
-    margin: 100px 100px 20px 100px;
+    margin: 20px;
+}
+
+
+.scoreBoard {
+display: flex;
+justify-content: center;
 }
 
 .scoreList {
-    display: flex;
-    justify-content: space-evenly;
+    display: block;
 }
-
 
 
 /* 
