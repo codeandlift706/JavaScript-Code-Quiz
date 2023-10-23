@@ -230,14 +230,14 @@ function renderScore(e) {
         initials: initialsInput.value
     };
 
-    //create array to store scores
-    // scoreArray = [];
-    // for (i = 0; i < scoreArray.length; i++ ) { //iterate over each item in the array. for each score: create a list element and append to the scoreBoard and store to array, arrange in order by least to greatest (score)
-    // scoreArray.push(userScore);
-    // console.log(userScore);
-
     localStorage.setItem("userScore", JSON.stringify(userScore)); //save to local storage - key name: userScore, value: userScore
     JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+
+    //Do not overwrite in local storage??????????????????
+    // let scoreArray = JSON.parse(localStorage.getItem("userScore")); //get from local storage
+    // scoreArray.push({ score: userScore[i].quizScore, initials: userScore[i].initials }) //push into scoreArray the new item
+    // localStorage.setItem("userScore", JSON.stringify(scoreArray)) //set it in local storage
+    //need to arrange order of scores on scoreboard too
 
     const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
     const listEl = document.createElement("li"); //create list element
