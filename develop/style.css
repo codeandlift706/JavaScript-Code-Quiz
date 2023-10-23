@@ -1,12 +1,56 @@
 :root {
-background-color: pink;
---list-color: rgb(123, 69, 123);
---largest-font: 50px;
---larger-font: 40px;
---large-font: 30px;
---centered: center;
+    background-color: pink;
+    --list-color: rgb(123, 69, 123);
+    --largest-font: 50px;
+    --larger-font: 40px;
+    --large-font: 30px;
+    --centered: center;
 }
 
+#timer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: var(--large-font);
+}
+
+#viewScore {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: var(--large-font);
+}
+
+
+.h1El {
+    font-size: var(--largest-font);
+    text-align: var(--centered);
+    font-weight: bolder;
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    margin: 100px 100px 20px 100px;
+}
+
+.h2El {
+    font-size: var(--larger-font);
+    text-align: var(--centered);
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    margin: 100px 100px 20px 100px;
+}
+
+.message {
+    font-size: var(--larger-font);
+    text-align: var(--centered);
+    margin: 100px 100px 20px 100px;
+} 
+
+.buttonStyle {
+text-align: var(--centered);
+margin: 100px 100px 100px 550px;
+font-size: var(--larger-font);
+border-radius: 5px;
+text-transform:uppercase;
+display: block;
+} 
 
 .question {
     font-size: var(--largest-font);
@@ -16,36 +60,29 @@ background-color: pink;
     margin: 100px 100px 20px 100px;
 }
 
-
-.h1El {
-font-size: var(--largest-font);
-text-align: var(--centered);
-font-weight: bolder;
-font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-margin: 100px 100px 20px 100px;
-}
-
-.h2El {
+/* .answer-buttons {
     font-size: var(--larger-font);
     text-align: var(--centered);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 100px 100px 20px 100px;
-    }
+} */
 
-#pageSwitcher {
-text-align: var(--centered);
-margin: 100px 100px 100px 550px;
-font-size: var(--larger-font);
-text-transform:uppercase;
+#initialsInput {
+    font-size: var(--larger-font);
+    text-align: var(--centered);
+    margin: 100px 100px 20px 100px;
 }
 
-.btn {
-margin: 100px;
-font-size: var(--large-font);
-text-align: var(--centered);
-font-family:Verdana, Geneva, Tahoma, sans-serif;
-border-radius: 5px;
+.scoreList {
+    display: flex;
+    justify-content: space-evenly;
 }
+
+
+
+/* 
+
+
+
 
 .btn:hover {
     border-color: purple;
@@ -61,35 +98,7 @@ text-align: var(--centered);
 font-size: var(--large-font);
 }
 
-#submitBtn {
-text-align: var(--centered);
-margin: 100px 100px 100px 550px;
-font-size: var(--larger-font);
-}
 
-#retakeQuizbtn {
-font-size: var(--larger-font);
-margin: 100px 100px 100px 200px;
-}
-
-#resetScoreBoardbtn {
-font-size: var(--larger-font);
-margin: 100px 100px 100px 200px;
-}
-
-#timer {
-position: fixed;
-top: 0;
-right: 0;
-font-size: var(--large-font);
-}
-
-#viewScore {
-position: fixed;
-top: 0;
-left: 0;
-font-size: var(--large-font);
-}
 
 /* .scoreBoard {
     display: flex;

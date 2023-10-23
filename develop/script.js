@@ -16,14 +16,17 @@ const scoreEl = document.getElementById("viewScore");
 const questionEl = document.querySelector(".question");
 const answerBtnsEl = document.querySelector(".answer-buttons");
 const answerBtn = document.querySelector(".btn");
-let currentQuestionIndex = 0
 
+let currentQuestionIndex = 0
 let quizScore = 0;
+
+const message = document.querySelector(".message");
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
 const doneMessage = "All done!";
 
 const listEl = document.querySelector(".listEl");
+const scoreList = document.querySelector(".scoreList");
 const finalScore = document.getElementById("finalScore");
 
 
@@ -124,7 +127,7 @@ function displayQuestion() {
 
     document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
     const currentQuestion = quizQuestions[currentQuestionIndex] //start at index 0 for quiz questions to display
-    document.querySelector(".question").textContent = currentQuestion.question //show the current question
+    questionEl.textContent = currentQuestion.question //show the current question
 
     for (let i = 0; i < currentQuestion.answers.length; i++) { //loop through each answer
 
@@ -142,13 +145,13 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
     choiceButton.addEventListener("click", function () { //on click
         const messagePopUp = document.createElement("p"); //create a p for every answer
-        document.querySelector(".message").innerHTML = ""; //reset the correct/incorrect message to show nothing
+        message.innerHTML = ""; //reset the correct/incorrect message to show nothing
 
         //for each answer you select
         if (quizAnswer) { //if answer.correct is true
             console.log("Correct!");
             messagePopUp.textContent = correctMessage;
-            document.querySelector(".message").append(messagePopUp);
+            message.append(messagePopUp);
             quizScore += 5;
             currentQuestionIndex++; //go to the next question
         }
@@ -156,7 +159,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
         else if (!quizAnswer) { //if answer.correct is false 
             console.log("False!");
             messagePopUp.textContent = wrongMessage;
-            document.querySelector(".message").append(messagePopUp);
+            message.append(messagePopUp);
             quizScore -= 5;
 
             if (quizScore < 0) { //if score goes negative, just set score to 0
@@ -179,7 +182,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
 //timer
 function setTime() {
-    let timerSeconds = 60;
+    let timerSeconds = 2;
 
     const timerInterval = setInterval(function () {
         timerSeconds--;
@@ -229,13 +232,13 @@ function renderScore(e) {
     // Save updated scoreArray to local storage
     localStorage.setItem("scores", JSON.stringify(scoreArray));
 
-    document.querySelector(".scoreList").innerHTML = ""; //clear the score list
+    scoreList.innerHTML = ""; //clear the score list
 
     for (const entry of scoreArray) { //for every entry in scoreArray
         const scoreEntry = `${entry.initials} ${entry.score}`; //template string to format score entry
         const listEl = document.createElement("p");
         listEl.textContent = scoreEntry;
-        document.querySelector(".scoreList").append(listEl);
+        scoreList.append(listEl);
     }
 
     initialsInput.value = ""; //clear input
@@ -266,6 +269,6 @@ retakeBtn.addEventListener("click", () => {
 
 //clears the scoreboard
 resetScoreboardBtn.addEventListener("click", () => {
-    document.querySelector(".scoreList").innerHTML = "";
+    scoreList.innerHTML = "";
     localStorage.clear();
 })
