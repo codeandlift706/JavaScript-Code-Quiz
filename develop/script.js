@@ -105,6 +105,13 @@ const quizQuestions = [{
 ]
 
 
+//Need to figure out:
+//score: can't have score be negative
+//score: how does score restart at 0
+//timer & score: Subtract time from timer for every incorrect question
+//timer & questions: User is done when - if timer runs out OR if last question is answered/no more questions left
+//question: if last question, display last question
+
 //functions
 //display homepage
 function defaultHomepage() {
@@ -120,7 +127,7 @@ defaultHomepage();
 
 
 
-// display questions and render buttons
+// display questions, render answers on buttons
 function displayQuestion() {
 
     document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
@@ -138,11 +145,8 @@ function displayQuestion() {
 };
 
 
-//select answers
+//select correct/incorrect answers
 function selectQuestion(choiceButton, quizAnswer) { //receive
-    //NEED TO ADD:
-    //if last question, display last question!!!!!!!!!!!!!!!!!!
-
 
     choiceButton.addEventListener("click", function () { //on click
         const messagePopUp = document.createElement("p"); //create a p for every answer
@@ -154,17 +158,17 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
             messagePopUp.textContent = correctMessage;
             document.querySelector(".message").append(messagePopUp);
             quizScore += 5;
+            console.log(quizScore);
             currentQuestionIndex++; //go to the next question
-            // return quizScore;
         }
 
         else if (!quizAnswer) { //if answer.correct is false 
             console.log("False!");
             messagePopUp.textContent = wrongMessage;
             document.querySelector(".message").append(messagePopUp);
-            quizScore -= 5; //HOW DO I MAKE IT SO THAT IT CAN'T GO NEGATIVE?????
+            quizScore -= 5;
+            console.log(quizScore);
             currentQuestionIndex++; //go to the next question
-            // return quizScore;
         }
 
         displayQuestion(); //repeat this whole process
@@ -174,13 +178,11 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
     choiceButton.classList.add("btn");
     document.querySelector(".answer-buttons").append(choiceButton);
 
-    return quizScore; //pass quizScore
+    console.log(quizScore);
 }
 
 
-
-
-//timer
+//timer, set how long 
 function setTime() {
     let timerSeconds = 2;
 
@@ -189,26 +191,15 @@ function setTime() {
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
 
-        // HOW DO I SUBTRACT TIME FROM TIMER FOR EVERY WRONG ANSWER?????????????????/
-        // for (let i = 0; i < quizQuestions.length; i++) {
-        //     let quizTrue = quizQuestions.answers[i].correct;
-        //     if (quizTrue === true) { //if answer.correct is true
-        //         timerSeconds += 10;
-        //     }
-
-        //     else if (quizTrue === false) { //if answer.correct is false 
-        //         timerSeconds -= 10;
-        //     }
-        // }
-        if (timerSeconds === 0) { //if timer runs out OR if last question is answered/no more questions left, (How to do this????)
+        if (timerSeconds === 0) {
             clearInterval(timerInterval);
+            console.log(quizScore);
             saveScore(quizScore);
         }
     }, 1000);
 }
 
-
-// //save score - collect score, submit score and initials, set to local storage
+// //save score - collect score, submit score and initials, set to local storage. Where does it get its quizScore from?
 function saveScore(quizScore) {
 
     firstSectionEl.style.display = "none"; //hide quiz page
@@ -257,7 +248,7 @@ firstBtn.addEventListener("click", () => {
 //submit score
 submitScoreBtn.addEventListener("click", renderScore);
 
-//retake the quiz - HOW DOES SCORE RESTART AT 0
+//retake the quiz
 retakeBtn.addEventListener("click", () => {
     thirdSectionEl.style.display = "none";
     firstSectionEl.style.display = "block";
