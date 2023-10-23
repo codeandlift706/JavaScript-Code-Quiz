@@ -106,9 +106,9 @@ const quizQuestions = [{
 
 
 //Need to figure out:
-//score: can't have score be negative
 //timer & score: Subtract time from timer for every incorrect question
-//reset questions to the start
+//score: how to append each score as a list item, not inline
+//score: how to order the scoreboard by score
 
 
 //functions
@@ -157,7 +157,6 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
             messagePopUp.textContent = correctMessage;
             document.querySelector(".message").append(messagePopUp);
             quizScore += 5;
-            console.log(quizScore);
             currentQuestionIndex++; //go to the next question
         }
 
@@ -166,7 +165,11 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
             messagePopUp.textContent = wrongMessage;
             document.querySelector(".message").append(messagePopUp);
             quizScore -= 5;
-            console.log(quizScore);
+
+            if (quizScore < 0 ) { //the score can't go negative
+                quizScore = 0;
+            }
+
             currentQuestionIndex++; //go to the next question
         }
 
@@ -252,6 +255,7 @@ retakeBtn.addEventListener("click", () => {
     thirdSectionEl.style.display = "none";
     firstSectionEl.style.display = "block";
     quizScore = 0;
+    currentQuestionIndex = 0;
     setTime();
     displayQuestion();
 });
