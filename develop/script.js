@@ -272,5 +272,5 @@ retakeBtn.addEventListener("click", () => {
 //clears the scoreboard
 resetScoreboardBtn.addEventListener("click", () => {
     document.querySelector(".scoreList").innerHTML = "";
-    localStorage.setItem("userScore", JSON.stringify({}));
+    localStorage.clear();
 })
