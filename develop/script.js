@@ -18,12 +18,12 @@ const answerBtnsEl = document.querySelector(".answer-buttons");
 const answerBtn = document.querySelector(".btn");
 let currentQuestionIndex = 0
 
-let timerSeconds = 2;
 let quizScore = 0;
 const correctMessage = "Correct!";
 const wrongMessage = "Incorrect!";
 const doneMessage = "All done!";
 
+const listEl = document.querySelector(".listEl");
 const finalScore = document.getElementById("finalScore");
 
 
@@ -182,6 +182,8 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
 //timer
 function setTime() {
+    let timerSeconds = 2;
+
     const timerInterval = setInterval(function () {
         timerSeconds--;
         timeEl.textContent = "Time: " + timerSeconds;
@@ -233,18 +235,14 @@ function renderScore(e) {
     localStorage.setItem("userScore", JSON.stringify(userScore)); //save to local storage - key name: userScore, value: userScore
     JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
 
-    //Do not overwrite in local storage??????????????????
-    // let scoreArray = JSON.parse(localStorage.getItem("userScore")); //get from local storage
-    // scoreArray.push({ score: userScore[i].quizScore, initials: userScore[i].initials }) //push into scoreArray the new item
-    // localStorage.setItem("userScore", JSON.stringify(scoreArray)) //set it in local storage
-    //need to arrange order of scores on scoreboard too
-
     const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
     const listEl = document.createElement("li"); //create list element
     listEl.textContent = scoreEntry //list element to show data
-    document.querySelector(".scoreBoard").append(scoreEntry); //append list element on the DOM
-
+    document.querySelector(".scoreList").append(scoreEntry); //append list element on the DOM
+    initialsInput.value = ""; //clear input
 }
+
+
 
 
 //processes
@@ -259,7 +257,7 @@ firstBtn.addEventListener("click", () => {
 //submit score
 submitScoreBtn.addEventListener("click", renderScore);
 
-//retake the quiz - score restarts at 0 and questions start over???????????????
+//retake the quiz - HOW DOES SCORE RESTART AT 0
 retakeBtn.addEventListener("click", () => {
     thirdSectionEl.style.display = "none";
     firstSectionEl.style.display = "block";
