@@ -107,10 +107,9 @@ const quizQuestions = [{
 
 //Need to figure out:
 //score: can't have score be negative
-//score: how does score restart at 0
 //timer & score: Subtract time from timer for every incorrect question
-//timer & questions: User is done when - if timer runs out OR if last question is answered/no more questions left
-//question: if last question, display last question
+//reset questions to the start
+
 
 //functions
 //display homepage
@@ -184,14 +183,14 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
 //timer, set how long 
 function setTime() {
-    let timerSeconds = 2;
+    let timerSeconds = 10;
 
     const timerInterval = setInterval(function () {
         timerSeconds--;
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
 
-        if (timerSeconds === 0) {
+        if (timerSeconds === 0 || currentQuestionIndex == quizQuestions.length ) {
             clearInterval(timerInterval);
             console.log(quizScore);
             saveScore(quizScore);
@@ -259,6 +258,6 @@ retakeBtn.addEventListener("click", () => {
 
 //clears the scoreboard
 resetScoreboardBtn.addEventListener("click", () => {
-    document.querySelector(".scoreBoard").innerHTML = "";
+    document.querySelector(".scoreList").innerHTML = "";
     localStorage.setItem("userScore", JSON.stringify({}));
 })
