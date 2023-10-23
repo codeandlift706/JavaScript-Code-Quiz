@@ -105,10 +105,6 @@ const quizQuestions = [{
 ]
 
 
-//Need to figure out:
-//timer & score: Subtract time from timer for every incorrect question
-
-
 //functions
 //display homepage
 function defaultHomepage() {
@@ -121,7 +117,6 @@ function defaultHomepage() {
     }
 }
 defaultHomepage();
-
 
 
 // display questions & render answers on buttons
@@ -184,7 +179,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
 //timer
 function setTime() {
-    let timerSeconds = 3;
+    let timerSeconds = 60;
 
     const timerInterval = setInterval(function () {
         timerSeconds--;
@@ -198,6 +193,7 @@ function setTime() {
         }
     }, 1000);
 }
+
 
 //collect score & submit initials/score
 function saveScore(quizScore) {
@@ -244,7 +240,6 @@ function renderScore(e) {
 
     initialsInput.value = ""; //clear input
 }
-
 
 
 //processes
