@@ -252,6 +252,7 @@ submitScoreBtn.addEventListener("click", renderScore);
 retakeBtn.addEventListener("click", () => {
     thirdSectionEl.style.display = "none";
     firstSectionEl.style.display = "block";
+    quizScore = 0;
     setTime();
     displayQuestion();
 });
