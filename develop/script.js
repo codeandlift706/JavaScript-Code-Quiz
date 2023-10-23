@@ -107,7 +107,6 @@ const quizQuestions = [{
 
 //Need to figure out:
 //timer & score: Subtract time from timer for every incorrect question
-//score: how to append each score as a list item, not inline
 //score: how to order the scoreboard by score
 
 
@@ -166,7 +165,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
             document.querySelector(".message").append(messagePopUp);
             quizScore -= 5;
 
-            if (quizScore < 0 ) { //the score can't go negative
+            if (quizScore < 0) { //if score goes negative, just set score to 0
                 quizScore = 0;
             }
 
@@ -186,14 +185,14 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
 //timer, set how long 
 function setTime() {
-    let timerSeconds = 10;
+    let timerSeconds = 3;
 
     const timerInterval = setInterval(function () {
         timerSeconds--;
         timeEl.textContent = "Time: " + timerSeconds;
         scoreEl.textContent = "Score: " + quizScore;
 
-        if (timerSeconds === 0 || currentQuestionIndex == quizQuestions.length ) {
+        if (timerSeconds === 0 || currentQuestionIndex == quizQuestions.length) {
             clearInterval(timerInterval);
             console.log(quizScore);
             saveScore(quizScore);
@@ -226,13 +225,36 @@ function renderScore(e) {
     };
 
     localStorage.setItem("userScore", JSON.stringify(userScore)); //save to local storage - key name: userScore, value: userScore
-    JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+    // JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
 
-    const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
-    const listEl = document.createElement("li"); //create list element
-    listEl.textContent = scoreEntry //list element to show data
-    document.querySelector(".scoreList").append(scoreEntry); //append list element on the DOM
-    initialsInput.value = ""; //clear input
+    // let scoreArray = []; //create array
+    // scoreArray.push(userScore).sort(userScore.score); //push scores into array and sort 
+
+
+    // const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
+    // const listEl = document.createElement("p"); //create list element
+    // listEl.textContent = scoreEntry //list element to show data
+    // document.querySelector(".scoreList").append(listEl); //append list element on the DOM
+
+
+    // initialsInput.value = ""; //clear input
+
+    let scoreArray = JSON.parse(localStorage.getItem("userScore")) || []; //retrieve from local storage and parse it or declare new one
+
+    scoreArray.push(userScore); //push scores into array and sort 
+    scoreArray.sort((a, b) => a.score - b.score); //sort in asc order
+
+    document.querySelector(".scoreList").innerHTML = ""; //clear the score list
+
+    for (const userScore of scoreArray) { //for each userScore in the array
+
+        const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
+        const listEl = document.createElement("p"); //create list element
+        listEl.textContent = scoreEntry //list element to show data
+        document.querySelector(".scoreList").append(listEl); //append list element on the DOM
+    }
+
+    initialsInput.value = ""; //clear inputbox input
 }
 
 
