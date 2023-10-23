@@ -14,7 +14,7 @@ const timeEl = document.getElementById("timer");
 const scoreEl = document.getElementById("viewScore");
 
 const questionEl = document.querySelector(".question");
-const answerBtnsEl = document.querySelector(".answer-buttons");
+const answerBtnsDiv = document.querySelector(".answer-buttons");
 const answerBtn = document.querySelector(".btn");
 
 let currentQuestionIndex = 0
@@ -125,7 +125,7 @@ defaultHomepage();
 // display questions & render answers on buttons
 function displayQuestion() {
 
-    document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
+    answerBtnsDiv.innerHTML = ""; //reset the buttons to show nothing
     const currentQuestion = quizQuestions[currentQuestionIndex] //start at index 0 for quiz questions to display
     questionEl.textContent = currentQuestion.question //show the current question
 
@@ -174,7 +174,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
     })
 
     choiceButton.classList.add("btn");
-    document.querySelector(".answer-buttons").append(choiceButton);
+    answerBtnsDiv.append(choiceButton);
 
     console.log(quizScore);
 }
