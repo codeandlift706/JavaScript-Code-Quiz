@@ -107,7 +107,6 @@ const quizQuestions = [{
 
 //Need to figure out:
 //timer & score: Subtract time from timer for every incorrect question
-//score: how to order the scoreboard by score
 
 
 //functions
@@ -125,7 +124,7 @@ defaultHomepage();
 
 
 
-// display questions, render answers on buttons
+// display questions & render answers on buttons
 function displayQuestion() {
 
     document.querySelector(".answer-buttons").innerHTML = ""; //reset the buttons to show nothing
@@ -183,7 +182,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 }
 
 
-//timer, set how long 
+//timer
 function setTime() {
     let timerSeconds = 3;
 
@@ -200,7 +199,7 @@ function setTime() {
     }, 1000);
 }
 
-// //save score - collect score, submit score and initials, set to local storage. Where does it get its quizScore from?
+//collect score & submit initials/score
 function saveScore(quizScore) {
 
     firstSectionEl.style.display = "none"; //hide quiz page
@@ -212,7 +211,7 @@ function saveScore(quizScore) {
 }
 
 
-//render score by retrieving from local storage
+//render score by setting & retrieving from local storage
 function renderScore(e) {
     e.preventDefault();
 
@@ -221,42 +220,30 @@ function renderScore(e) {
 
     const userScore = { //create userScore object with properties
         score: quizScore,
-        initials: initialsInput.value
+        initials: initialsInput.value.trim() //remove whitespace
     };
 
-    localStorage.setItem("userScore", JSON.stringify(userScore)); //save to local storage - key name: userScore, value: userScore
-    // JSON.parse(localStorage.getItem("userScore")); //retrieve from local storage and parse it
+    let scoreArray = JSON.parse(localStorage.getItem("scores")) || []; // Get existing scores or default to an empty array if none exist -- retrieving and initializing from local storage
 
-    // let scoreArray = []; //create array
-    // scoreArray.push(userScore).sort(userScore.score); //push scores into array and sort 
-
-
-    // const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
-    // const listEl = document.createElement("p"); //create list element
-    // listEl.textContent = scoreEntry //list element to show data
-    // document.querySelector(".scoreList").append(listEl); //append list element on the DOM
-
-
-    // initialsInput.value = ""; //clear input
-
-    let scoreArray = JSON.parse(localStorage.getItem("userScore")) || []; //retrieve from local storage and parse it or declare new one
 
     scoreArray.push(userScore); //push scores into array and sort 
-    scoreArray.sort((a, b) => a.score - b.score); //sort in asc order
+    // Sort scores in descending order
+    scoreArray.sort((a, b) => b.score - a.score);
+
+    // Save updated scoreArray to local storage
+    localStorage.setItem("scores", JSON.stringify(scoreArray));
 
     document.querySelector(".scoreList").innerHTML = ""; //clear the score list
 
-    for (const userScore of scoreArray) { //for each userScore in the array
-
-        const scoreEntry = (userScore.initials + " " + userScore.score); //how we want data displayed
-        const listEl = document.createElement("p"); //create list element
-        listEl.textContent = scoreEntry //list element to show data
-        document.querySelector(".scoreList").append(listEl); //append list element on the DOM
+    for (const entry of scoreArray) { //for every entry in scoreArray
+        const scoreEntry = `${entry.initials} ${entry.score}`; //template string to format score entry
+        const listEl = document.createElement("p");
+        listEl.textContent = scoreEntry;
+        document.querySelector(".scoreList").append(listEl);
     }
 
-    initialsInput.value = ""; //clear inputbox input
+    initialsInput.value = ""; //clear input
 }
-
 
 
 
