@@ -34,6 +34,7 @@ This project is under the MIT license.
 The coding (event listeners, arrays, for loops, functions, timer, conditional statements, local storage, etc) -all the additions- that were made to the web page are credited to the curriculum taught in the UCI coding boot camp. I also received assistance ASKBCS Assistant for the stringify/parse methods.
 The CSS Reset Sheet code can be obtained here: https://meyerweb.com/eric/tools/css/reset/. 
 The CDN links for CSS Framework, Materialize, can be found here: https://materializecss.com/getting-started.html. 
+I got the font family from this resource: https://fonts.google.com/specimen/Fira+Sans+Extra+Condensed.
 How I aligned text can be found here: https://css-tricks.com/almanac/properties/t/text-align/#:~:text=The%20text%2Dalign%20property%20in,aligns%20along%20the%20left%20side.
 How I used flexbox properties for CSS: https://css-tricks.com/snippets/css/a-guide-to-flexbox/.
 This is the resource I used to prevent the answer buttons from displaying inline: https://stackoverflow.com/questions/42723596/prevent-flex-items-from-rendering-side-to-side.
