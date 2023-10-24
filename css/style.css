@@ -73,8 +73,6 @@ p {
 
 .btn {
     text-align: var(--centered);
-    /* font-size: var(--medium-font); */
-    /* font-size: var(--large-font); */
     justify-content: center;
     flex-direction: column;
     background-color: black;
@@ -90,7 +88,6 @@ p {
 .clickContainer {
     display: flex;
     justify-content: center;
-    /* flex-direction: column; */
 }
 
 #initialsInput {

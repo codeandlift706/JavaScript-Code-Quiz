@@ -175,13 +175,12 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 
     choiceButton.classList.add("btn");
     answerBtnsDiv.append(choiceButton);
-
-    console.log(quizScore);
 }
 
 
 //timer
 function setTime() {
+
     let timerSeconds = 500;
 
     const timerInterval = setInterval(function () {
@@ -212,6 +211,7 @@ function saveScore(quizScore) {
 
 //render score by setting & retrieving from local storage
 function renderScore(e) {
+
     e.preventDefault();
 
     secondSectionEl.style.display = "none"; //hide submit initials page
@@ -223,15 +223,11 @@ function renderScore(e) {
     };
 
     let scoreArray = JSON.parse(localStorage.getItem("scores")) || []; // Get existing scores or default to an empty array if none exist -- retrieving and initializing from local storage
-
-
     scoreArray.push(userScore); //push scores into array and sort 
     // Sort scores in descending order
     scoreArray.sort((a, b) => b.score - a.score);
-
     // Save updated scoreArray to local storage
     localStorage.setItem("scores", JSON.stringify(scoreArray));
-
     scoreList.innerHTML = ""; //clear the score list
 
     for (const entry of scoreArray) { //for every entry in scoreArray
