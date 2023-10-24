@@ -18,10 +18,14 @@ VS Code to create and manipulate HTML, CSS, and JavaScript for the application t
 ## Usage
 This can be used as a quiz template for any subject.
 
-View a screenshot of the application here:
-![Screenshot](QuizPageScreenshot.png)
-View a screenshot of the VS Code here:
-![Screenshot](VSCodeQuizScreenshot.png)
+View a screenshot of the homepage with the start quiz button:
+![Screenshot](assets/QuizPageScreenshot.png)
+View a screenshot of the question page to select an answer:
+![Screenshot](assets/QuizPage2Screenshot.png)
+View a screenshot of the end of the quiz to input initials to submit score:
+![Screenshot](assets/QuizPage3Screenshot.png)
+View a screenshot of the scoreboard with the retake quiz button and reset scoreboard button:
+![Screenshot](assets/QuizPage4Screenshot.png)
 
 ## License
 This project is under the MIT license.
@@ -29,10 +33,11 @@ This project is under the MIT license.
 ## Contribution
 The coding (event listeners, arrays, for loops, functions, timer, conditional statements, local storage, etc) -all the additions- that were made to the web page are credited to the curriculum taught in the UCI coding boot camp. I also received assistance ASKBCS Assistant for the stringify/parse methods.
 The CSS Reset Sheet code can be obtained here: https://meyerweb.com/eric/tools/css/reset/. 
+CSS Framework, Materialize, can be found here: https://materializecss.com/getting-started.html. 
 How I aligned text can be found here: https://css-tricks.com/almanac/properties/t/text-align/#:~:text=The%20text%2Dalign%20property%20in,aligns%20along%20the%20left%20side.
-Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/.
-How I used local storage here: https://blog.logrocket.com/localstorage-javascript-complete-guide/.
-How I cleared local storage here: https://theanshuman.dev/articles/the-right-way-to-use-localstorage-in-javascript-41a0.
+How I used flexbox properties for CSS: https://css-tricks.com/snippets/css/a-guide-to-flexbox/.
+How I used local storage can be found here: https://blog.logrocket.com/localstorage-javascript-complete-guide/.
+How I cleared local storage is from this resource: https://theanshuman.dev/articles/the-right-way-to-use-localstorage-in-javascript-41a0.
 The source for information on addEventListener: https://www.w3schools.com/js/js_htmldom_eventlistener.asp.
 The source for the input type for button: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button.
 How to toggle between hide and show: https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp.

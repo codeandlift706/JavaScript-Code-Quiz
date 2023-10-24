@@ -181,7 +181,7 @@ function selectQuestion(choiceButton, quizAnswer) { //receive
 //timer
 function setTime() {
 
-    let timerSeconds = 75;
+    let timerSeconds = 90;
 
     const timerInterval = setInterval(function () {
         timerSeconds--;
