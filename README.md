@@ -19,13 +19,13 @@ VS Code to create and manipulate HTML, CSS, and JavaScript for the application t
 This can be used as a quiz template for any subject.
 
 View a screenshot of the homepage with the start quiz button:
-![Screenshot](assets/QuizPageScreenshot.png)
+![Screenshot](assets/images/QuizPageScreenshot.png)
 View a screenshot of the question page to select an answer:
-![Screenshot](assets/QuizPage2Screenshot.png)
+![Screenshot](assets/images/QuizPage2Screenshot.png)
 View a screenshot of the end of the quiz to input initials to submit score:
-![Screenshot](assets/QuizPage3Screenshot.png)
+![Screenshot](assets/images/QuizPage3Screenshot.png)
 View a screenshot of the scoreboard with the retake quiz button and reset scoreboard button:
-![Screenshot](assets/QuizPage4Screenshot.png)
+![Screenshot](assets/images/QuizPage4Screenshot.png)
 
 ## License
 This project is under the MIT license.
