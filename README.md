@@ -33,16 +33,19 @@ This project is under the MIT license.
 ## Contribution
 The coding (event listeners, arrays, for loops, functions, timer, conditional statements, local storage, etc) -all the additions- that were made to the web page are credited to the curriculum taught in the UCI coding boot camp. I also received assistance ASKBCS Assistant for the stringify/parse methods.
 The CSS Reset Sheet code can be obtained here: https://meyerweb.com/eric/tools/css/reset/. 
-CSS Framework, Materialize, can be found here: https://materializecss.com/getting-started.html. 
+The CDN links for CSS Framework, Materialize, can be found here: https://materializecss.com/getting-started.html. 
 How I aligned text can be found here: https://css-tricks.com/almanac/properties/t/text-align/#:~:text=The%20text%2Dalign%20property%20in,aligns%20along%20the%20left%20side.
 How I used flexbox properties for CSS: https://css-tricks.com/snippets/css/a-guide-to-flexbox/.
+This is the resource I used to prevent the answer buttons from displaying inline: https://stackoverflow.com/questions/42723596/prevent-flex-items-from-rendering-side-to-side.
+This is the source I use to retrieve the Lakers hex code colors for the theme: https://teamcolorcodes.com/los-angeles-lakers-color-codes/.
 How I used local storage can be found here: https://blog.logrocket.com/localstorage-javascript-complete-guide/.
 How I cleared local storage is from this resource: https://theanshuman.dev/articles/the-right-way-to-use-localstorage-in-javascript-41a0.
 The source for information on addEventListener: https://www.w3schools.com/js/js_htmldom_eventlistener.asp.
 The source for the input type for button: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button.
 How to toggle between hide and show: https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp.
 The source for querySelectorAll: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll.
-To complete the README with screenshots, the source for the code is: https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository. To complete the README section, the source is: https://www.makeareadme.com/. 
+To complete the README with screenshots, the source for the code is: https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository. 
+To complete the README section, the source is: https://www.makeareadme.com/. 
 
 ## Questions
 The link to my Github Profile here: https://github.com/codeandlift706.
