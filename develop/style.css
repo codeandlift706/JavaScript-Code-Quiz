@@ -1,10 +1,13 @@
 :root {
-    background-color: pink;
+    background-color: #FDB927;
     --list-color: rgb(123, 69, 123);
     --largest-font: 50px;
     --larger-font: 40px;
     --large-font: 30px;
+    --medium-font: 25px;
+    --small-font: 20px;
     --centered: center;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
 }
 
 #timer {
@@ -21,100 +24,93 @@
     font-size: var(--large-font);
 }
 
-
 .h1El {
     font-size: var(--largest-font);
     text-align: var(--centered);
     font-weight: bolder;
-    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     margin: 100px 100px 20px 100px;
 }
 
 .h2El {
     font-size: var(--larger-font);
     text-align: var(--centered);
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-    margin: 100px 100px 20px 100px;
+    margin: 20px;
 }
 
 .message {
-    font-size: var(--larger-font);
-    text-align: var(--centered);
-    margin: 100px 100px 20px 100px;
-} 
-
-.buttonStyle {
-text-align: var(--centered);
-margin: 20px;
-font-size: var(--large-font);
-border-radius: 5px;
-/* text-transform:uppercase; */
-display: block;
-} 
-
-
-.answer-buttons {
-    font-size: var(--larger-font);
-    text-align: var(--centered);
-    margin: 100px 100px 20px 100px;
+    margin: 20px;
+    padding-top: 30px;
 }
 
+p {
+    font-size: var(--larger-font);
+    text-align: var(--centered);
+}
 
 .question {
     font-size: var(--largest-font);
     text-align: var(--centered);
     font-weight: bolder;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 100px 100px 20px 100px;
+}
+
+.btn-style {
+    text-align: var(--centered);
+    font-size: var(--large-font);
+    margin: 20px;
+    border-radius: 5px;
+    display: block;
+}
+
+.answer-buttons {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: var(--centered);
+}
+
+.btn {
+    text-align: var(--centered);
+    /* font-size: var(--medium-font); */
+    /* font-size: var(--large-font); */
+    justify-content: center;
+    flex-direction: column;
+    background-color: black;
+    padding: 20px;
+    margin: 20px;
+
+}
+
+.btn:hover {
+    background-color: #552583;
 }
 
 .clickContainer {
     display: flex;
     justify-content: center;
+    /* flex-direction: column; */
 }
 
 #initialsInput {
-    font-size: var(--large-font);
     text-align: var(--centered);
+    text-transform: uppercase;
     margin: 20px;
+    width: 25%;
+    height: 2.60rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    border: 1px solid black;
+    background-color: white;
+
 }
 
-
 .scoreBoard {
-display: flex;
-justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .scoreList {
     display: block;
+    margin: 50px;
 }
-
-
-/* 
-
-
-
-
-.btn:hover {
-    border-color: purple;
-}
-
-#generateFinalScore {
-text-align: var(--centered);
-font-size: var(--large-font);
-}
-
-#insertInitialBox {
-text-align: var(--centered);
-font-size: var(--large-font);
-}
-
-
-
-/* .scoreBoard {
-    display: flex;
-}
-
-.scoreList {
-    display:block;
-} */

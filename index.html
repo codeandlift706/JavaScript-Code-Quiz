@@ -6,8 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript Quiz</title>
     <link rel="stylesheet" href="./develop/reset.css" />
+    <!-- materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="./develop/style.css" />
     <script defer src="./develop/script.js"></script>
+    <!-- materialize js -->
+    <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,14 +26,16 @@
         <h2 class="h2El">Take the quiz and see how well you score before time runs out!
             <p>NOTE: Points will be deducted each time you select the wrong answer.</p>
         </h2>
-
-        <button id="pageSwitcher" class="buttonStyle">Start the quiz</button>
+        <div class="clickContainer">
+            <button id="pageSwitcher" class="btn btn-primary black white-text">Start Quiz</button>
+        </div>
     </header>
 
     <section class="quizPage">
         <h1 class="question">Question here</h1>
         <h2 class="message"></h2>
-        <div class="answer-buttons"></div>
+        <div class="answer-buttons">
+        </div>
     </section>
 
     <section class="donePage">
@@ -31,27 +43,26 @@
             <h1 class="h1El">Thanks for taking the quiz!</h1>
             <h2 id="finalScore" class="h2El">Final Score:__</h2>
             <div class="clickContainer">
-                <input type="text" id="initialsInput" placeholder="input your initials here">
-                <button id="submitBtn" class="buttonStyle">Submit your score</button>
+                <input type="text" id="initialsInput" placeholder="Input Initials Here">
+                <button id="submitBtn" class="btn btn-primary black white-text">Submit Score</button>
             </div>
         </form>
     </section>
 
     <section class="highScorePage">
-        <h1 class="h1El">Quiz Scoreboard</h1>
+        <h1 class="h1El">Scoreboard</h1>
         <div class="scoreBoard">
             <ul class="scoreList">
-
             </ul>
         </div>
         <div class="clickContainer">
-        <button id="retakeQuizbtn" class="buttonStyle">Retake the quiz</button>
-        <button id="resetScoreBoardbtn" class="buttonStyle">Reset the scoreboard</button>
-    </div>
+            <button id="retakeQuizbtn" class="btn btn-primary black white-text">Retake the quiz</button>
+            <button id="resetScoreBoardbtn" class="btn btn-primary black white-text">Reset the scoreboard</button>
+        </div>
     </section>
 
-    <aside id="timer">Time</aside>
     <aside id="viewScore">Score</aside>
+    <aside id="timer">Time</aside>
 
 </body>
 
